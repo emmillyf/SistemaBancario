@@ -4,6 +4,16 @@ public class Diretor extends Funcionario {
 
 	private Integer senha;
 
+	public boolean autentica(Integer senha) {
+		if (this.senha == senha) {
+			System.out.println("Acesso Permitido!");
+			return true;
+		} else {
+			System.out.println("Acesso Negado!");
+			return false;
+		}
+	}
+
 	// construtor default
 
 	public Diretor() {
@@ -11,8 +21,8 @@ public class Diretor extends Funcionario {
 
 	}
 
-	public Diretor(String nome, String cpf, Double salario) {
-		super();
+	public Diretor(Integer id, String nome, String cpf, Double salario) {
+		super(id, nome, cpf, salario);
 
 	}
 

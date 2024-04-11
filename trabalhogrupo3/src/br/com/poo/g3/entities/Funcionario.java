@@ -4,23 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Funcionario {
-	
+
 	private Integer id;
 	private String nome;
 	private String cpf;
 	private Double salario;
-	
+
 	static Map<Integer, Funcionario> mapaFuncionarios = new HashMap<>();
-	
+
 	// construtor default
-	
+
 	public Funcionario() {
 		super();
-		
+
 	}
 
 	// construtor parametrizado
-	
+
 	public Funcionario(Integer id, String nome, String cpf, Double salario) {
 		super();
 		this.id = id;
@@ -45,13 +45,12 @@ public class Funcionario {
 		return salario;
 	}
 
-	
 	public static Map<Integer, Funcionario> getMapaFuncionarios() {
 		return mapaFuncionarios;
 	}
 
 	// método toString
-	
+
 	@Override
 	public String toString() {
 		return "Funcionario \nid: " + id + "\nnome: " + nome + "\ncpf: " + cpf + "\nsalario: " + salario + "\n";
