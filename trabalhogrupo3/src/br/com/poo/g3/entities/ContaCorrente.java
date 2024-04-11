@@ -13,8 +13,8 @@ public class ContaCorrente extends Conta {
 
 	}
 
-	public ContaCorrente(Integer numeroDaConta, Cliente cliente, Double saldo) {
-		super(numeroDaConta, cliente, saldo);
+	public ContaCorrente(Integer numeroDaConta, Double saldo) {
+		super(numeroDaConta, saldo);
 
 	}
 

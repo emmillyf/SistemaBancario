@@ -10,8 +10,8 @@ public class ContaPoupanca extends Conta {
 		super();
 	}
 
-	public ContaPoupanca(Integer numeroDaConta, Cliente cliente, Double saldo) {
-		super(numeroDaConta, cliente, saldo);
+	public ContaPoupanca(Integer numeroDaConta, Double saldo) {
+		super(numeroDaConta, saldo);
 
 	}
 
