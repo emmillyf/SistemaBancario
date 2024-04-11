@@ -4,16 +4,6 @@ public class Presidente extends Funcionario {
 
 	private int senha;
 
-	public boolean autentica(int senha) {
-
-		if (this.senha == senha) {
-			System.out.println("Acesso Permitido!");
-			return true;
-		} else {
-			System.out.println("Acesso Negado!");
-		}
-	}
-
 	// construtor default
 	
 	public Presidente() {
@@ -22,7 +12,7 @@ public class Presidente extends Funcionario {
 	}
 
 	public Presidente(String nome, String cpf, double salario) {
-		super(nome, cpf, salario);
+		super();
 		
 	}
 	// construtor parametrizado

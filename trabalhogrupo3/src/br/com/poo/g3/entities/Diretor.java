@@ -2,17 +2,7 @@ package br.com.poo.g3.entities;
 
 public class Diretor extends Funcionario {
 
-	private Integer  senha;
-
-	public boolean autentica(Integer senha) {
-
-		if (this.senha == senha) {
-			System.out.println("Acesso Permitido!");
-			return true;
-		} else {
-			System.out.println("Acesso Negado!");
-		}
-	}
+	private Integer senha;
 
 	// construtor default
 
@@ -21,8 +11,8 @@ public class Diretor extends Funcionario {
 
 	}
 
-	public Diretor(String nome, String cpf, double salario) {
-		super(nome, cpf, salario);
+	public Diretor(String nome, String cpf, Double salario) {
+		super();
 
 	}
 

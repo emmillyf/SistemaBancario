@@ -5,17 +5,6 @@ public class Gerente extends Funcionario{
 	private Integer senha;
 	private Integer numeroDeFuncionarios;
 	
-	
-	public boolean autentica(Integer senha) {
-		
-		if (this.senha == senha) {
-			System.out.println("Acesso Permitido!");
-			return true;
-		}else {
-			System.out.println("Acesso Negado!");
-		}
-	}
-	
 	// construtores default
 	
 	public Gerente() {
@@ -24,7 +13,7 @@ public class Gerente extends Funcionario{
 	}
 
 	public Gerente(String nome, String cpf, double salario) {
-		super(nome, cpf, salario);
+		super();
 	
 	}
 
