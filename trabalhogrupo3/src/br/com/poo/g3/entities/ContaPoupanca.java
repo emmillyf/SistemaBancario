@@ -9,16 +9,15 @@ public class ContaPoupanca extends Conta {
 	public ContaPoupanca() {
 		super();
 	}
-
-	public ContaPoupanca(Integer numeroDaConta, Double saldo) {
-		super(numeroDaConta, saldo);
-
-	}
-
 	// construtor parametrizado
 
 	public ContaPoupanca(Double rendimento) {
 		super();
+		this.rendimento = rendimento;
+	}
+
+	public ContaPoupanca(Integer numeroDaConta, Double saldo, Double rendimento) {
+		super(numeroDaConta, saldo);
 		this.rendimento = rendimento;
 	}
 

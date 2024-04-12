@@ -21,15 +21,10 @@ public class Diretor extends Funcionario {
 
 	}
 
-	public Diretor(Integer id, String nome, String cpf, Double salario) {
-		super(id, nome, cpf, salario);
-
-	}
-
 	// construtor parametrizado
 
-	public Diretor(Integer senha) {
-		super();
+	public Diretor(Integer id, String nome, String cpf, Double salario, Integer senha) {
+		super(id, nome, cpf, salario);
 		this.senha = senha;
 	}
 
@@ -38,6 +33,7 @@ public class Diretor extends Funcionario {
 	public int getSenha() {
 		return senha;
 	}
+
 
 	public void setSenha(Integer senha) {
 		this.senha = senha;

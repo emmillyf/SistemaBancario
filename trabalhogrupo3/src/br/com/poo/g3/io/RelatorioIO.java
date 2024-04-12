@@ -14,8 +14,13 @@ import java.util.logging.Logger;
 import br.com.poo.g3.entities.Cliente;
 import br.com.poo.g3.entities.Conta;
 import br.com.poo.g3.entities.ContaCorrente;
+import br.com.poo.g3.entities.ContaPoupanca;
+import br.com.poo.g3.entities.Diretor;
 import br.com.poo.g3.entities.Funcionario;
-import br.com.poo.g3.enums.TipoRegistro;
+import br.com.poo.g3.entities.Gerente;
+import br.com.poo.g3.entities.Presidente;
+import br.com.poo.g3.enums.TipoConta;
+import br.com.poo.g3.enums.TipoPessoa;
 import br.com.poo.g3.util.Util;
 
 public class RelatorioIO extends ContaCorrente {
@@ -34,25 +39,55 @@ public class RelatorioIO extends ContaCorrente {
 				Util.customizer();
 				String[] dados = linha.split(";");
 
-				if (dados[0].equalsIgnoreCase(TipoRegistro.TIPOCONTA.name())) {
-					// private Integer numeroDaConta;
-					// private Double saldo = 0.0;
-					Conta conta = new Conta(Integer.parseInt(dados[1]), Double.parseDouble(dados[2]));
+				if (dados[0].equalsIgnoreCase(TipoConta.CONTA_CORRENTE.name())) {
+					// Integer numeroDaConta, Double saldo, Double tarifa, Double limite
 
-					Conta.getMapaContas().put(Integer.parseInt(dados[1]), conta);
-					logger.log(Level.INFO, conta::toString);
-				} else if (dados[0].equalsIgnoreCase(TipoRegistro.FUNCIONARIO.name())) {
+					Conta contaCorrente = new ContaCorrente(Integer.parseInt(dados[1]), Double.parseDouble(dados[2]),
+							Double.parseDouble(dados[3]), Double.parseDouble(dados[4]));
+
+					Conta.getMapaContas().put(Integer.parseInt(dados[1]), contaCorrente);
+					logger.log(Level.INFO, contaCorrente::toString);
+
+				} else if (dados[0].equalsIgnoreCase(TipoConta.CONTA_POUPANCA.name())) {
+					// Integer numeroDaConta, Double saldo, Double rendimento
+					Conta contaPoupanca = new ContaPoupanca(Integer.parseInt(dados[1]), Double.parseDouble(dados[2]),
+							Double.parseDouble(dados[3]));
+
+					Conta.getMapaContas().put(Integer.parseInt(dados[1]), contaPoupanca);
+					logger.log(Level.INFO, contaPoupanca::toString);
+				} else if (dados[0].equalsIgnoreCase(TipoPessoa.GERENTE.name())) {
 					// private Integer id;
 					// private String nome;
 					// private String cpf;
 					// private Double salario;
-					Funcionario funcionario = new Funcionario(Integer.parseInt(dados[1]), dados[2], dados[3],
-							Double.parseDouble(dados[4]));
+					Funcionario gerente = new Gerente(Integer.parseInt(dados[1]), dados[2], dados[3],
+							Double.parseDouble(dados[4]), Integer.parseInt(dados[5]), Integer.parseInt(dados[6]));
 
-					Funcionario.getMapaFuncionarios().put(null, funcionario);
-					logger.log(Level.INFO, funcionario::toString);
+					Funcionario.getMapaFuncionarios().put(Integer.parseInt(dados[1]), gerente);
+					logger.log(Level.INFO, gerente::toString);
 
-				} else if (dados[0].equalsIgnoreCase(TipoRegistro.TIPOCLIENTE.name())) {
+				} else if (dados[0].equalsIgnoreCase(TipoPessoa.DIRETOR.name())) {
+					// private Integer id;
+					// private String nome;
+					// private String cpf;
+					// private Double salario;
+					Funcionario diretor = new Diretor(Integer.parseInt(dados[1]), dados[2], dados[3],
+							Double.parseDouble(dados[4]), Integer.parseInt(dados[5]));
+
+					Funcionario.getMapaFuncionarios().put(Integer.parseInt(dados[1]), diretor);
+					logger.log(Level.INFO, diretor::toString);
+
+				} else if (dados[0].equalsIgnoreCase(TipoPessoa.PRESIDENTE.name())) {
+					// private Integer id;
+					// private String nome;
+					// private String cpf;
+					// private Double salario;
+					Funcionario presidente = new Presidente(Integer.parseInt(dados[1]), dados[2], dados[3],
+							Double.parseDouble(dados[4]), Integer.parseInt(dados[5]));
+
+					Funcionario.getMapaFuncionarios().put(Integer.parseInt(dados[1]), presidente);
+					logger.log(Level.INFO, presidente::toString);
+				} else if (dados[0].equalsIgnoreCase(TipoPessoa.CLIENTE.name())) {
 					// private Integer id;
 					// private String nome;
 					// private LocalDate dataNasc;

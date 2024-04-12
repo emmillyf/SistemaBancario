@@ -8,10 +8,9 @@ public class GrupoApplication {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		
 
-	            RelatorioIO.leitor("banco");
-		
+		RelatorioIO.leitor("banco");
+
 	}
 
 }

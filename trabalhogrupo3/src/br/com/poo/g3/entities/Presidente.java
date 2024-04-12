@@ -20,14 +20,10 @@ public class Presidente extends Funcionario {
 
 	}
 
-	public Presidente(Integer id, String nome, String cpf, Double salario) {
-		super(id, nome, cpf, salario);
-
-	}
 	// construtor parametrizado
 
-	public Presidente(int senha) {
-		super();
+	public Presidente(Integer id, String nome, String cpf, Double salario, int senha) {
+		super(id, nome, cpf, salario);
 		this.senha = senha;
 	}
 

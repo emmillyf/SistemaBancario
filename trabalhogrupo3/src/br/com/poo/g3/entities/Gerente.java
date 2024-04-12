@@ -22,15 +22,10 @@ public class Gerente extends Funcionario {
 
 	}
 
-	public Gerente(Integer id, String nome, String cpf, Double salario) {
-		super(id, nome, cpf, salario);
-
-	}
-
 	// construtor parametrizado
-
-	public Gerente(Integer senha, Integer numeroDeFuncionarios) {
-		super();
+	
+	public Gerente(Integer id, String nome, String cpf, Double salario, Integer senha, Integer numeroDeFuncionarios) {
+		super(id, nome, cpf, salario);
 		this.senha = senha;
 		this.numeroDeFuncionarios = numeroDeFuncionarios;
 	}

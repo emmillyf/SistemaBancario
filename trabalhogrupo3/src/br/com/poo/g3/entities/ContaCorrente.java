@@ -20,13 +20,11 @@ public class ContaCorrente extends Conta {
 
 	// construtor parametrizado
 
-	public ContaCorrente(Double tarifa, Double limite) {
-		super();
+	public ContaCorrente(Integer numeroDaConta, Double saldo, Double tarifa, Double limite) {
+		super(numeroDaConta, saldo);
 		this.tarifa = tarifa;
 		this.limite = limite;
 	}
-
-	// getters
 
 	public Double getTarifa() {
 		return tarifa;
