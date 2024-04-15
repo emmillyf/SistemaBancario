@@ -87,7 +87,17 @@ public class RelatorioIO extends ContaCorrente {
 
 					Funcionario.getMapaFuncionarios().put(Integer.parseInt(dados[1]), presidente);
 					logger.log(Level.INFO, presidente::toString);
-				} else if (dados[0].equalsIgnoreCase(TipoPessoa.CLIENTE.name())) {
+				}else if (dados[0].equalsIgnoreCase(TipoPessoa.FUNCIONARIO.name())) {
+					// private Integer id;
+//					private String nome;
+//					private String cpf;
+//					private Double salario;
+					Funcionario funcionario = new Funcionario(Integer.parseInt(dados[1]), dados[2], dados[3], Double.parseDouble(dados[4]));
+
+					Funcionario.getMapaFuncionarios().put(Integer.parseInt(dados[1]), funcionario);
+					logger.log(Level.INFO, funcionario::toString);
+				
+			}else if (dados[0].equalsIgnoreCase(TipoPessoa.CLIENTE.name())) {
 					// private Integer id;
 					// private String nome;
 					// private LocalDate dataNasc;
