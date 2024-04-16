@@ -10,10 +10,7 @@ public class Cliente {
 	private String nome;
 	private LocalDate dataNasc;
 	private String email;
-	private String senha;
-//	private String usuario;
-//	private String senha;
-	
+
 	static Map<Integer, Cliente> mapaClientes = new HashMap<>();
 
 	// construtor default
@@ -24,15 +21,12 @@ public class Cliente {
 
 	// construtor parametrizado
 
-	public Cliente(Integer id, String nome, LocalDate dataNasc, String email, String senha) {
+	public Cliente(Integer id, String nome, LocalDate dataNasc, String email) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.dataNasc = dataNasc;
 		this.email = email;
-		this.senha = senha;
-//		this.usuario = usuario;
-//		this.senha = senha;
 	}
 
 	// getters e setters
@@ -53,27 +47,6 @@ public class Cliente {
 		return email;
 	}
 	
-	
-//	public String getUsuario() {
-//		return usuario;
-//	}
-//
-//	public void setUsuario(String usuario) {
-//		this.usuario = usuario;
-//	}
-//
-//	public String getSenha() {
-//		return senha;
-//	}
-//
-//	public void setSenha(String senha) {
-//		this.senha = senha;
-//	}
-
-	public String getSenha() {
-		return senha;
-	}
-
 	public static Map<Integer, Cliente> getMapaClientes() {
 		return mapaClientes;
 	}
