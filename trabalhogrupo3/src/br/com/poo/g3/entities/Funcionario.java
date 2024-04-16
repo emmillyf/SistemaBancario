@@ -3,12 +3,16 @@ package br.com.poo.g3.entities;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Funcionario {
+import br.com.poo.g3.enums.TipoPessoa;
+
+public class Funcionario extends Conta {
 
 	private Integer id;
 	private String nome;
 	private String cpf;
 	private Double salario;
+	private String senha;
+	private TipoPessoa cargo;
 
 	static Map<Integer, Funcionario> mapaFuncionarios = new HashMap<>();
 
@@ -21,16 +25,19 @@ public class Funcionario {
 
 	// construtor parametrizado
 
-	public Funcionario(Integer id, String nome, String cpf, Double salario) {
-		super();
+	public Integer getId() {
+		return id;
+	}
+
+	public Funcionario(Integer numeroDaConta, Double saldo, Integer id, String nome, String cpf, Double salario,
+			String senha, TipoPessoa cargo) {
+		super(numeroDaConta, saldo);
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.salario = salario;
-	}
-
-	public Integer getId() {
-		return id;
+		this.senha = senha;
+		this.cargo = cargo;
 	}
 
 	public String getNome() {
@@ -43,6 +50,10 @@ public class Funcionario {
 
 	public Double getSalario() {
 		return salario;
+	}
+
+	public String getSenha() {
+		return senha;
 	}
 
 	public static Map<Integer, Funcionario> getMapaFuncionarios() {

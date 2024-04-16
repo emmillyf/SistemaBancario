@@ -1,12 +1,13 @@
 package br.com.poo.g3.entities;
 
+import br.com.poo.g3.enums.TipoPessoa;
+
 public class Gerente extends Funcionario {
 
-	private Integer senha;
 	private Integer numeroDeFuncionarios;
 
-	public boolean autentica(Integer senha) {
-		if (this.senha == senha) {
+	public boolean autentica(String senha) {
+		if (this.getSenha() == senha) {
 			System.out.println("Acesso Permitido!");
 			return true;
 		} else {
@@ -23,22 +24,14 @@ public class Gerente extends Funcionario {
 	}
 
 	// construtor parametrizado
-	
-	public Gerente(Integer id, String nome, String cpf, Double salario, Integer senha, Integer numeroDeFuncionarios) {
-		super(id, nome, cpf, salario);
-		this.senha = senha;
-		this.numeroDeFuncionarios = numeroDeFuncionarios;
+
+	public Gerente(Integer numeroDaConta, Double saldo, Integer id, String nome, String cpf, Double salario,
+			String senha, TipoPessoa cargo) {
+		super(numeroDaConta, saldo, id, nome, cpf, salario, senha, cargo);
+		this.numeroDeFuncionarios = 0;
 	}
 
 	// getters e setters
-
-	public int getSenha() {
-		return senha;
-	}
-
-	public void setSenha(Integer senha) {
-		this.senha = senha;
-	}
 
 	public int getNumeroDeFuncionarios() {
 		return numeroDeFuncionarios;
@@ -47,12 +40,4 @@ public class Gerente extends Funcionario {
 	public void setNumeroDeFuncionarios(Integer numeroDeFuncionarios) {
 		this.numeroDeFuncionarios = numeroDeFuncionarios;
 	}
-
-	// método toString
-
-	@Override
-	public String toString() {
-		return "Gerente \nsenha: " + senha + "\nnumeroDeFuncionarios: " + numeroDeFuncionarios + "\n";
-	}
-
 }
