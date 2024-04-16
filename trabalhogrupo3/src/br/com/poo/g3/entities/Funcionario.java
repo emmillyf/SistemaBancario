@@ -9,6 +9,7 @@ public class Funcionario {
 	private String nome;
 	private String cpf;
 	private Double salario;
+	private String senha;
 
 	static Map<Integer, Funcionario> mapaFuncionarios = new HashMap<>();
 
@@ -21,12 +22,13 @@ public class Funcionario {
 
 	// construtor parametrizado
 
-	public Funcionario(Integer id, String nome, String cpf, Double salario) {
+	public Funcionario(Integer id, String nome, String cpf, Double salario, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.salario = salario;
+		this.senha = senha;
 	}
 
 	public Integer getId() {
@@ -43,6 +45,11 @@ public class Funcionario {
 
 	public Double getSalario() {
 		return salario;
+	}
+	
+
+	public String getSenha() {
+		return senha;
 	}
 
 	public static Map<Integer, Funcionario> getMapaFuncionarios() {

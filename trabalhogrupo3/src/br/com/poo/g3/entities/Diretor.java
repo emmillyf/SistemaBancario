@@ -2,9 +2,9 @@ package br.com.poo.g3.entities;
 
 public class Diretor extends Funcionario {
 
-	private Integer senha;
+	private String senha;
 
-	public boolean autentica(Integer senha) {
+	public boolean autentica(String senha) {
 		if (this.senha == senha) {
 			System.out.println("Acesso Permitido!");
 			return true;
@@ -23,19 +23,19 @@ public class Diretor extends Funcionario {
 
 	// construtor parametrizado
 
-	public Diretor(Integer id, String nome, String cpf, Double salario, Integer senha) {
-		super(id, nome, cpf, salario);
+	public Diretor(Integer id, String nome, String cpf, Double salario, String senha) {
+		super(id, nome, cpf, salario, senha);
 		this.senha = senha;
 	}
 
 	// getters e setters
 
-	public int getSenha() {
+	public String getSenha() {
 		return senha;
 	}
 
 
-	public void setSenha(Integer senha) {
+	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 

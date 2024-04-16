@@ -2,10 +2,10 @@ package br.com.poo.g3.entities;
 
 public class Gerente extends Funcionario {
 
-	private Integer senha;
+	private String senha;
 	private Integer numeroDeFuncionarios;
 
-	public boolean autentica(Integer senha) {
+	public boolean autentica(String senha) {
 		if (this.senha == senha) {
 			System.out.println("Acesso Permitido!");
 			return true;
@@ -24,19 +24,19 @@ public class Gerente extends Funcionario {
 
 	// construtor parametrizado
 	
-	public Gerente(Integer id, String nome, String cpf, Double salario, Integer senha, Integer numeroDeFuncionarios) {
-		super(id, nome, cpf, salario);
+	public Gerente(Integer id, String nome, String cpf, Double salario, String senha, Integer numeroDeFuncionarios) {
+		super(id, nome, cpf, salario, senha);
 		this.senha = senha;
 		this.numeroDeFuncionarios = numeroDeFuncionarios;
 	}
 
 	// getters e setters
 
-	public int getSenha() {
+	public String getSenha() {
 		return senha;
 	}
 
-	public void setSenha(Integer senha) {
+	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
