@@ -1,5 +1,8 @@
 package br.com.poo.g3.entities;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Diretor extends Funcionario {
 
 	private Integer senha;
@@ -33,7 +36,6 @@ public class Diretor extends Funcionario {
 	public int getSenha() {
 		return senha;
 	}
-
 
 	public void setSenha(Integer senha) {
 		this.senha = senha;
