@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import br.com.poo.g3.entities.Cliente;
 import br.com.poo.g3.entities.Conta;
@@ -24,7 +22,7 @@ public class RelatorioIO extends Funcionario {
 
 	static final String PATH_BASICO = "./temp/";
 	static final String EXTENSAO = ".txt";
-	private static Logger logger = Util.setupLogger();
+//	private static Logger logger = Util.setupLogger();
 	static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	public static void leitor(String path) throws IOException {
@@ -51,7 +49,7 @@ public class RelatorioIO extends Funcionario {
 					// usuarios.setMapaGerentes(usuarios.getMapaGerentes().put(Integer.parseInt(dados[1]),
 					// gerente));
 					Funcionario.getMapaFuncionarios().put(Integer.parseInt(dados[1]), gerente);
-					logger.log(Level.INFO, gerente::toString);
+//					logger.log(Level.INFO, gerente::toString);
 
 				} else if (dados[0].equalsIgnoreCase(TipoPessoa.DIRETOR.name())) {
 					// private Integer id;
@@ -63,7 +61,7 @@ public class RelatorioIO extends Funcionario {
 							TipoPessoa.DIRETOR);
 
 					Funcionario.getMapaFuncionarios().put(Integer.parseInt(dados[1]), diretor);
-					logger.log(Level.INFO, diretor::toString);
+//					logger.log(Level.INFO, diretor::toString);
 
 				} else if (dados[0].equalsIgnoreCase(TipoPessoa.PRESIDENTE.name())) {
 					// private Integer id;
@@ -75,7 +73,7 @@ public class RelatorioIO extends Funcionario {
 							TipoPessoa.PRESIDENTE);
 
 					Funcionario.getMapaFuncionarios().put(Integer.parseInt(dados[1]), presidente);
-					logger.log(Level.INFO, presidente::toString);
+//					logger.log(Level.INFO, presidente::toString);
 				} else if (dados[0].equalsIgnoreCase(TipoPessoa.FUNCIONARIO.name())) {
 					// private Integer id;
 //				private String nome;
@@ -86,7 +84,7 @@ public class RelatorioIO extends Funcionario {
 							TipoPessoa.FUNCIONARIO);
 
 					Funcionario.getMapaFuncionarios().put(Integer.parseInt(dados[1]), funcionario);
-					logger.log(Level.INFO, funcionario::toString);
+//					logger.log(Level.INFO, funcionario::toString);
 
 				} else if (dados[0].equalsIgnoreCase(TipoPessoa.CLIENTE.name())) {
 					// private Integer id;
@@ -97,7 +95,7 @@ public class RelatorioIO extends Funcionario {
 							dados[4], dados[5]);
 
 					Cliente.getMapaClientes().put(Integer.parseInt(dados[1]), cliente);
-					logger.log(Level.INFO, cliente::toString);
+//					logger.log(Level.INFO, cliente::toString);
 
 				} else if (dados[0].equalsIgnoreCase(TipoConta.CONTA_CORRENTE.name())) {
 					// Integer numeroDaConta, Double saldo, Double tarifa, Double limite
@@ -106,26 +104,26 @@ public class RelatorioIO extends Funcionario {
 							Double.parseDouble(dados[3]), Double.parseDouble(dados[4]));
 
 					Conta.getMapaContas().put(Integer.parseInt(dados[1]), contaCorrente);
-					logger.log(Level.INFO, contaCorrente::toString);
+//					logger.log(Level.INFO, contaCorrente::toString);
 					// adicionar a lógica (if/else) para salvar uma lista de contas por agencia
-					
+
 				} else if (dados[0].equalsIgnoreCase(TipoConta.CONTA_POUPANCA.name())) {
 					// Integer numeroDaConta, Double saldo, Double rendimento
 					Conta contaPoupanca = new ContaPoupanca(Integer.parseInt(dados[1]), Double.parseDouble(dados[2]),
 							Double.parseDouble(dados[3]));
 
 					Conta.getMapaContas().put(Integer.parseInt(dados[1]), contaPoupanca);
-					logger.log(Level.INFO, contaPoupanca::toString);
+//					logger.log(Level.INFO, contaPoupanca::toString);
 					// adicionar a lógica (if/else) para salvar uma lista de contas por agencia
-					
-				} else {
-					break;
+
 				}
+			} else {
+				break;
 			}
-			isFinish = false;
+//			isFinish = false;
 		}
 		buffRead.close();
-		System.out.println("Fechado!");
+//		System.out.println("Fechado!");
 	}
 }
 

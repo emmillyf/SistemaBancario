@@ -5,25 +5,23 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import br.com.poo.g3.entities.Diretor;
-import br.com.poo.g3.entities.Funcionario;
-import br.com.poo.g3.entities.Gerente;
-import br.com.poo.g3.enums.TipoPessoa;
+import br.com.poo.g3.controller.AutenticacaoController;
 import br.com.poo.g3.util.Util;
 
 public class MenuService {
 	static Logger logger = Util.setupLogger();
 	static Scanner sc = new Scanner(System.in);
-	static Funcionario escravo = new Funcionario(198, 77.00, 1, "Amanda da silva", "666.666.666-99", 33.00, "4444",
-			TipoPessoa.FUNCIONARIO);
-	static Gerente trabalhador = new Gerente(200, 8888.00, 2, "Lucas da silva", "777.777.777-77", 1000.00, "9999",
-			TipoPessoa.GERENTE);
+	static AutenticacaoController autenticacaoController = new AutenticacaoController();
+//	static Funcionario escravo = new Funcionario(198, 77.00, 1, "Amanda da silva", "666.666.666-99", 33.00, "4444",
+//			TipoPessoa.FUNCIONARIO);
+//	static Gerente trabalhador = new Gerente(200, 8888.00, 2, "Lucas da silva", "777.777.777-77", 1000.00, "9999",
+//			TipoPessoa.GERENTE);
+//
+//	static FuncionarioService funcionarios = new FuncionarioService();
+//	static Diretor puxaSaco = new Diretor(6969, 800.00, 6, "Nicolas da silva", "696.969.696-69", 6500.70, "9898",
+//			TipoPessoa.DIRETOR);
 
-	static FuncionarioService funcionarios = new FuncionarioService();
-	static Diretor puxaSaco = new Diretor(6969, 800.00, 6, "Nicolas da silva", "696.969.696-69", 6500.70, "9898",
-			TipoPessoa.DIRETOR);
-
-	public static void menuInicial() throws IOException {
+	public static void menuInicial() throws IOException, InterruptedException {
 
 		Util.customizer();
 		logger.log(Level.INFO, """
@@ -56,7 +54,7 @@ public class MenuService {
 		}
 	}
 
-	public static void menuLogin() throws IOException {
+	public static void menuLogin() throws IOException, InterruptedException {
 		Util.customizer();
 		logger.log(Level.INFO, """
 				Menu interativo:
@@ -74,12 +72,12 @@ public class MenuService {
 		switch (key) {
 		case 1:
 			Util.customizer();
-			logger.log(Level.INFO, "Bem-Vindo " + escravo.getNome() + "");
+//			logger.log(Level.INFO, "Bem-Vindo " + escravo.getNome() + "");
 			menuFuncionario();
 			break;
 		case 2:
 			Util.customizer();
-			logger.log(Level.INFO, "Bem-Vindo" + trabalhador.getNome() + "");
+//			logger.log(Level.INFO, "Bem-Vindo" + trabalhador.getNome() + "");
 			menuGerente();
 			break;
 		case 3:
@@ -94,8 +92,9 @@ public class MenuService {
 			break;
 		case 5:
 			Util.customizer();
+			autenticacaoController.login();
 			logger.log(Level.INFO, "Logado com sucesso!");
-			menuCliente();
+//			menuCliente();
 			break;
 		case 6:
 			Util.customizer();
@@ -161,11 +160,11 @@ public class MenuService {
 			break;
 		case 2:
 			Util.customizer();
-			logger.log(Level.INFO, String.valueOf(funcionarios.listaFuncionarios()));
+//			logger.log(Level.INFO, String.valueOf(funcionarios.listaFuncionarios()));
 			break;
 		case 3:
 			Util.customizer();
-			logger.log(Level.INFO, String.valueOf(trabalhador.getSaldo()));
+//			logger.log(Level.INFO, String.valueOf(trabalhador.getSaldo()));
 			break;
 		case 4:
 			Util.customizer();
@@ -207,7 +206,7 @@ public class MenuService {
 			break;
 		case 4:
 			Util.customizer();
-			logger.log(Level.INFO, String.valueOf(puxaSaco.getSaldo()));
+//			logger.log(Level.INFO, String.valueOf(puxaSaco.getSaldo()));
 			break;
 		case 5:
 			Util.customizer();
@@ -306,15 +305,15 @@ public class MenuService {
 		switch (key) {
 		case 1:
 			Util.customizer();
-			logger.log(Level.INFO, escravo.getId() + "");
+//			logger.log(Level.INFO, escravo.getId() + "");
 			break;
 		case 2:
 			Util.customizer();
-			logger.log(Level.INFO, escravo.getSalario() + "");
+//			logger.log(Level.INFO, escravo.getSalario() + "");
 			break;
 		case 3:
 			Util.customizer();
-			logger.log(Level.INFO, escravo.getSaldo() + "");
+//			logger.log(Level.INFO, escravo.getSaldo() + "");
 			break;
 		case 4:
 			Util.customizer();

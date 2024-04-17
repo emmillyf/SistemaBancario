@@ -5,7 +5,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import br.com.poo.g3.entities.Cliente;
-import br.com.poo.g3.entities.Funcionario;
 import br.com.poo.g3.services.AutenticacaoService;
 import br.com.poo.g3.services.MenuService;
 import br.com.poo.g3.util.Util;
@@ -23,10 +22,10 @@ public class AutenticacaoController {
 				Thread.sleep(2000);
 				logger.log(Level.INFO, "\n\nLogin realizado com sucesso!");
 				Thread.sleep(2000);
-
+				MenuService.menuCliente();
 			} else {
 				Thread.sleep(2000);
-				logger.log(Level.INFO, "Login não realizado com sucesso...");
+				logger.log(Level.INFO, "Login não realizado...");
 				Thread.sleep(2000);
 			}
 		} while (cliente == null);
