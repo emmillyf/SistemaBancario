@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Conta extends Cliente {
+	
+	// buscar uma lógica que 
 	private static int contadorDeContas = 1;
 	// toda vez que uma conta for criada, um número é atribuido à ela
-
+	
+	private Integer numeroDaAgencia;
 	private Integer numeroDaConta;
 	private Double saldo = 0.0;
 

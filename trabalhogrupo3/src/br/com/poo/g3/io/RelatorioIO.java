@@ -31,6 +31,8 @@ public class RelatorioIO extends Funcionario {
 		BufferedReader buffRead = new BufferedReader(new FileReader(PATH_BASICO + path + EXTENSAO));
 		String linha = "";
 		boolean isFinish = true;
+		// definir 4 listas vazias, uma para cada agencia
+		// Exemplo: List<Conta> agencia1 = new ArrayList<>();
 		while (isFinish) {
 			linha = buffRead.readLine();
 			if (linha != null) {
@@ -46,6 +48,8 @@ public class RelatorioIO extends Funcionario {
 							Integer.parseInt(dados[3]), dados[4], dados[5], Double.parseDouble(dados[6]), dados[7],
 							TipoPessoa.GERENTE);
 
+					// usuarios.setMapaGerentes(usuarios.getMapaGerentes().put(Integer.parseInt(dados[1]),
+					// gerente));
 					Funcionario.getMapaFuncionarios().put(Integer.parseInt(dados[1]), gerente);
 					logger.log(Level.INFO, gerente::toString);
 
@@ -103,7 +107,8 @@ public class RelatorioIO extends Funcionario {
 
 					Conta.getMapaContas().put(Integer.parseInt(dados[1]), contaCorrente);
 					logger.log(Level.INFO, contaCorrente::toString);
-
+					// adicionar a lógica (if/else) para salvar uma lista de contas por agencia
+					
 				} else if (dados[0].equalsIgnoreCase(TipoConta.CONTA_POUPANCA.name())) {
 					// Integer numeroDaConta, Double saldo, Double rendimento
 					Conta contaPoupanca = new ContaPoupanca(Integer.parseInt(dados[1]), Double.parseDouble(dados[2]),
@@ -111,7 +116,8 @@ public class RelatorioIO extends Funcionario {
 
 					Conta.getMapaContas().put(Integer.parseInt(dados[1]), contaPoupanca);
 					logger.log(Level.INFO, contaPoupanca::toString);
-
+					// adicionar a lógica (if/else) para salvar uma lista de contas por agencia
+					
 				} else {
 					break;
 				}

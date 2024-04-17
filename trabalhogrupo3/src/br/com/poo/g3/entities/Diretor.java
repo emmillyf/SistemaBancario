@@ -6,6 +6,8 @@ import java.util.Map;
 import br.com.poo.g3.enums.TipoPessoa;
 
 public class Diretor extends Funcionario {
+	
+	// criar 2 agencias de controle para cada diretor (agencias que ja existem)
 
 	static Map<Integer, Diretor> mapaDiretores = new HashMap<>();
 

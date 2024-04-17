@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
+// import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 import br.com.poo.g3.controller.AutenticacaoController;
 import br.com.poo.g3.io.RelatorioIO;
@@ -114,7 +114,6 @@ public class GrupoApplication {
 	}
 
 	public static void login() {
-		System.out.println("AAA");
 		try {
 			autenticacaoController.login();
 		} catch (IOException e) {
