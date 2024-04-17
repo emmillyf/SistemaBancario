@@ -1,21 +1,12 @@
 package br.com.poo.g3.entities;
 
+import java.time.LocalDate;
+
 import br.com.poo.g3.enums.TipoPessoa;
 
 public class Gerente extends Funcionario {
 
-	// criar uma agencia 
-
-	public boolean autentica(String senha) {
-		if (this.getSenha() == senha) {
-			System.out.println("Acesso Permitido!");
-			return true;
-		} else {
-			System.out.println("Acesso Negado!");
-			return false;
-		}
-	}
-
+	// criar uma agencia
 	// construtores default
 
 	public Gerente() {
@@ -23,12 +14,14 @@ public class Gerente extends Funcionario {
 
 	}
 
+	public Gerente(Integer id, String nome, LocalDate dataNasc, String cpf, String senha, Double salario,
+			TipoPessoa cargo) {
+		super(id, nome, dataNasc, cpf, senha, salario, cargo);
+	}
+
 	// construtor parametrizado
 
-	public Gerente(Integer numeroDaConta, Double saldo, Integer id, String nome, String cpf, Double salario,
-			String senha, TipoPessoa cargo) {
-		super(numeroDaConta, saldo, id, nome, cpf, salario, senha, cargo);
-	}
+	
 
 	// getters e setters
 

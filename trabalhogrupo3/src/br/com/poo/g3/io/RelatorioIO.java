@@ -5,6 +5,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import br.com.poo.g3.entities.Cliente;
 import br.com.poo.g3.entities.Conta;
@@ -14,6 +18,7 @@ import br.com.poo.g3.entities.Diretor;
 import br.com.poo.g3.entities.Funcionario;
 import br.com.poo.g3.entities.Gerente;
 import br.com.poo.g3.entities.Presidente;
+import br.com.poo.g3.entities.Usuarios;
 import br.com.poo.g3.enums.TipoConta;
 import br.com.poo.g3.enums.TipoPessoa;
 import br.com.poo.g3.util.Util;
@@ -22,15 +27,23 @@ public class RelatorioIO extends Funcionario {
 
 	static final String PATH_BASICO = "./temp/";
 	static final String EXTENSAO = ".txt";
-//	private static Logger logger = Util.setupLogger();
+	private static Logger logger = Util.setupLogger();
 	static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-	public static void leitor(String path) throws IOException {
+	public static Usuarios leitor(String path) throws IOException {
 		BufferedReader buffRead = new BufferedReader(new FileReader(PATH_BASICO + path + EXTENSAO));
 		String linha = "";
 		boolean isFinish = true;
+		Usuarios usuarios = new Usuarios();
+		Map<String, Funcionario> novofuncionario = new HashMap<>();
+		Map<String, Gerente> novogerente = new HashMap<>();
+		Map<String, Presidente> novopresidente = new HashMap<>();
+		Map<String, Diretor> novodiretor = new HashMap<>();
+		Map<String, Cliente> novocliente = new HashMap<>();
+		Map<String, Conta> novaconta = new HashMap<>();
 		// definir 4 listas vazias, uma para cada agencia
 		// Exemplo: List<Conta> agencia1 = new ArrayList<>();
+
 		while (isFinish) {
 			linha = buffRead.readLine();
 			if (linha != null) {
@@ -42,13 +55,11 @@ public class RelatorioIO extends Funcionario {
 					// private String nome;
 					// private String cpf;
 					// private Double salario;
-					Funcionario gerente = new Gerente(Integer.parseInt(dados[1]), Double.parseDouble(dados[2]),
-							Integer.parseInt(dados[3]), dados[4], dados[5], Double.parseDouble(dados[6]), dados[7],
-							TipoPessoa.GERENTE);
+					Gerente gerente = new Gerente(Integer.parseInt(dados[1]), dados[2], LocalDate.parse(dados[3], dtf),
+							dados[4], dados[6], Double.parseDouble(dados[5]), TipoPessoa.GERENTE);
 
-					// usuarios.setMapaGerentes(usuarios.getMapaGerentes().put(Integer.parseInt(dados[1]),
-					// gerente));
-					Funcionario.getMapaFuncionarios().put(Integer.parseInt(dados[1]), gerente);
+					novogerente.put(dados[4], gerente);
+
 //					logger.log(Level.INFO, gerente::toString);
 
 				} else if (dados[0].equalsIgnoreCase(TipoPessoa.DIRETOR.name())) {
@@ -56,11 +67,10 @@ public class RelatorioIO extends Funcionario {
 					// private String nome;
 					// private String cpf;
 					// private Double salario;
-					Funcionario diretor = new Diretor(Integer.parseInt(dados[1]), Double.parseDouble(dados[2]),
-							Integer.parseInt(dados[3]), dados[4], dados[5], Double.parseDouble(dados[6]), dados[7],
-							TipoPessoa.DIRETOR);
+					Diretor diretor = new Diretor(Integer.parseInt(dados[1]), dados[2], LocalDate.parse(dados[3], dtf),
+							dados[4], dados[5], Double.parseDouble(dados[6]), TipoPessoa.DIRETOR);
 
-					Funcionario.getMapaFuncionarios().put(Integer.parseInt(dados[1]), diretor);
+					novodiretor.put(dados[4], diretor);
 //					logger.log(Level.INFO, diretor::toString);
 
 				} else if (dados[0].equalsIgnoreCase(TipoPessoa.PRESIDENTE.name())) {
@@ -68,22 +78,21 @@ public class RelatorioIO extends Funcionario {
 					// private String nome;
 					// private String cpf;
 					// private Double salario;
-					Funcionario presidente = new Presidente(Integer.parseInt(dados[1]), Double.parseDouble(dados[2]),
-							Integer.parseInt(dados[3]), dados[4], dados[5], Double.parseDouble(dados[6]), dados[7],
+					Presidente presidente = new Presidente(Integer.parseInt(dados[1]), dados[2],
+							LocalDate.parse(dados[3], dtf), dados[4], dados[5], Double.parseDouble(dados[6]),
 							TipoPessoa.PRESIDENTE);
-
-					Funcionario.getMapaFuncionarios().put(Integer.parseInt(dados[1]), presidente);
-//					logger.log(Level.INFO, presidente::toString);
+					novopresidente.put(dados[4], presidente);
+					logger.log(Level.INFO, presidente::toString);
 				} else if (dados[0].equalsIgnoreCase(TipoPessoa.FUNCIONARIO.name())) {
 					// private Integer id;
 //				private String nome;
 //				private String cpf;
 //				private Double salario;
-					Funcionario funcionario = new Funcionario(Integer.parseInt(dados[1]), Double.parseDouble(dados[2]),
-							Integer.parseInt(dados[3]), dados[4], dados[5], Double.parseDouble(dados[6]), dados[7],
+					Funcionario funcionario = new Funcionario(Integer.parseInt(dados[1]), dados[2],
+							LocalDate.parse(dados[3], dtf), dados[4], dados[6], Double.parseDouble(dados[5]),
 							TipoPessoa.FUNCIONARIO);
 
-					Funcionario.getMapaFuncionarios().put(Integer.parseInt(dados[1]), funcionario);
+					novofuncionario.put(dados[4], funcionario);
 //					logger.log(Level.INFO, funcionario::toString);
 
 				} else if (dados[0].equalsIgnoreCase(TipoPessoa.CLIENTE.name())) {
@@ -93,37 +102,35 @@ public class RelatorioIO extends Funcionario {
 					// private String email;
 					Cliente cliente = new Cliente(Integer.parseInt(dados[1]), dados[2], LocalDate.parse(dados[3], dtf),
 							dados[4], dados[5]);
+				
+					if ((dados[6].equalsIgnoreCase(TipoConta.CONTA_CORRENTE.name()))) {
+						ContaCorrente contaCorrente = new ContaCorrente(Integer.parseInt(dados[7]),
+								Double.parseDouble(dados[8]), Integer.parseInt(dados[9]), dados[4]);
+						novaconta.put(dados[4], contaCorrente);
+					}
+					if ((dados[6].equalsIgnoreCase(TipoConta.CONTA_POUPANCA.name()))) {
+						ContaPoupanca contaPoupanca = new ContaPoupanca(Integer.parseInt(dados[7]),
+								Double.parseDouble(dados[8]), Integer.parseInt(dados[8]), dados[4]);
+						novaconta.put(dados[4], contaPoupanca);
 
-					Cliente.getMapaClientes().put(Integer.parseInt(dados[1]), cliente);
+					}
+					novocliente.put(dados[4], cliente);
 //					logger.log(Level.INFO, cliente::toString);
-
-				} else if (dados[0].equalsIgnoreCase(TipoConta.CONTA_CORRENTE.name())) {
-					// Integer numeroDaConta, Double saldo, Double tarifa, Double limite
-
-					Conta contaCorrente = new ContaCorrente(Integer.parseInt(dados[1]), Double.parseDouble(dados[2]),
-							Double.parseDouble(dados[3]), Double.parseDouble(dados[4]));
-
-					Conta.getMapaContas().put(Integer.parseInt(dados[1]), contaCorrente);
-//					logger.log(Level.INFO, contaCorrente::toString);
-					// adicionar a lógica (if/else) para salvar uma lista de contas por agencia
-
-				} else if (dados[0].equalsIgnoreCase(TipoConta.CONTA_POUPANCA.name())) {
-					// Integer numeroDaConta, Double saldo, Double rendimento
-					Conta contaPoupanca = new ContaPoupanca(Integer.parseInt(dados[1]), Double.parseDouble(dados[2]),
-							Double.parseDouble(dados[3]));
-
-					Conta.getMapaContas().put(Integer.parseInt(dados[1]), contaPoupanca);
-//					logger.log(Level.INFO, contaPoupanca::toString);
-					// adicionar a lógica (if/else) para salvar uma lista de contas por agencia
-
 				}
-			} else {
-				break;
-			}
-//			isFinish = false;
+				} else {
+					usuarios.setClientes(novocliente);
+					usuarios.setDiretores(novodiretor);
+					usuarios.setFuncionarios(novofuncionario);
+					usuarios.setPresidente(novopresidente);
+					usuarios.setGerentes(novogerente);
+					usuarios.setContas(novaconta);
+					isFinish = false;
+					break;
+				}
 		}
 		buffRead.close();
-//		System.out.println("Fechado!");
+		System.out.println("Fechado!");
+		return usuarios;
 	}
 }
 

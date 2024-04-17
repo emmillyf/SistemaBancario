@@ -1,5 +1,7 @@
 package br.com.poo.g3.entities;
 
+import java.time.LocalDate;
+
 import br.com.poo.g3.enums.TipoPessoa;
 
 public class Presidente extends Funcionario {
@@ -20,10 +22,12 @@ public class Presidente extends Funcionario {
 
 	}
 
+	public Presidente(Integer id, String nome, LocalDate dataNasc, String cpf, String senha, Double salario,
+			TipoPessoa cargo) {
+		super(id, nome, dataNasc, cpf, senha, salario, cargo);
+	}
+
 	// construtor parametrizado
 
-	public Presidente(Integer numeroDaConta, Double saldo, Integer id, String nome, String cpf, Double salario,
-			String senha, TipoPessoa cargo) {
-		super(numeroDaConta, saldo, id, nome, cpf, salario, senha, cargo);
-	}
+
 }

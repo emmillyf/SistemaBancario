@@ -6,12 +6,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import br.com.poo.g3.controller.AutenticacaoController;
+import br.com.poo.g3.entities.Cliente;
+import br.com.poo.g3.entities.Conta;
+import br.com.poo.g3.entities.ContaPoupanca;
+import br.com.poo.g3.entities.Usuarios;
 import br.com.poo.g3.util.Util;
 
 public class MenuService {
 	static Logger logger = Util.setupLogger();
 	static Scanner sc = new Scanner(System.in);
 	static AutenticacaoController autenticacaoController = new AutenticacaoController();
+	static Cliente clientelogado;
+	static Usuarios usuariosbanco;
+	static Conta contacliente;
 //	static Funcionario escravo = new Funcionario(198, 77.00, 1, "Amanda da silva", "666.666.666-99", 33.00, "4444",
 //			TipoPessoa.FUNCIONARIO);
 //	static Gerente trabalhador = new Gerente(200, 8888.00, 2, "Lucas da silva", "777.777.777-77", 1000.00, "9999",
@@ -21,90 +28,90 @@ public class MenuService {
 //	static Diretor puxaSaco = new Diretor(6969, 800.00, 6, "Nicolas da silva", "696.969.696-69", 6500.70, "9898",
 //			TipoPessoa.DIRETOR);
 
-	public static void menuInicial() throws IOException, InterruptedException {
+//	public static void menuInicial() throws IOException, InterruptedException {
+//
+//		Util.customizer();
+//		logger.log(Level.INFO, """
+//				Menu interativo:
+//				[1]\tLogin
+//				[2]\tCadastro
+//				[3]\tSair
+//				Digite uma opção:
+//				""");
+//
+//		int key = sc.nextInt();
+//
+//		switch (key) {
+//		case 1:
+//			Util.customizer();
+//			menuLogin();
+//			break;
+//		case 2:
+//			Util.customizer();
+//			logger.log(Level.INFO, "Cadastrado com sucesso!");
+//			menuCadastro();
+//			break;
+//		case 3:
+//			Util.customizer();
+//			logger.log(Level.INFO, "Sessão encerrada!");
+//			break;
+//		default:
+//			logger.log(Level.INFO, "Opção inválida");
+//			menuInicial();
+//		}
+//	}
 
-		Util.customizer();
-		logger.log(Level.INFO, """
-				Menu interativo:
-				[1]\tLogin
-				[2]\tCadastro
-				[3]\tSair
-				Digite uma opção:
-				""");
-
-		int key = sc.nextInt();
-
-		switch (key) {
-		case 1:
-			Util.customizer();
-			menuLogin();
-			break;
-		case 2:
-			Util.customizer();
-			logger.log(Level.INFO, "Cadastrado com sucesso!");
-			menuCadastro();
-			break;
-		case 3:
-			Util.customizer();
-			logger.log(Level.INFO, "Sessão encerrada!");
-			break;
-		default:
-			logger.log(Level.INFO, "Opção inválida");
-			menuInicial();
-		}
-	}
-
-	public static void menuLogin() throws IOException, InterruptedException {
-		Util.customizer();
-		logger.log(Level.INFO, """
-				Menu interativo:
-				[1]\tLogar como funcionário
-				[2]\tLogar como gerente
-				[3]\tLogar como diretor
-				[4]\tLogar como presidente
-				[5]\tLogar como cliente
-				[7]\tSair
-				Digite uma opção:
-				""");
-
-		int key = sc.nextInt();
-
-		switch (key) {
-		case 1:
-			Util.customizer();
-//			logger.log(Level.INFO, "Bem-Vindo " + escravo.getNome() + "");
-			menuFuncionario();
-			break;
-		case 2:
-			Util.customizer();
-//			logger.log(Level.INFO, "Bem-Vindo" + trabalhador.getNome() + "");
-			menuGerente();
-			break;
-		case 3:
-			Util.customizer();
-			logger.log(Level.INFO, "Logado com sucesso!");
-			menuDiretor();
-			break;
-		case 4:
-			Util.customizer();
-			logger.log(Level.INFO, "Logado com sucesso!");
-			menuPresidente();
-			break;
-		case 5:
-			Util.customizer();
-			autenticacaoController.login();
-			logger.log(Level.INFO, "Logado com sucesso!");
-//			menuCliente();
-			break;
-		case 6:
-			Util.customizer();
-			logger.log(Level.INFO, "Sessão encerrada!");
-			break;
-		default:
-			logger.log(Level.INFO, "Opção inválida");
-			menuLogin();
-		}
-	}
+//	public static void menuLogin() throws IOException, InterruptedException {
+//		Util.customizer();
+//		logger.log(Level.INFO, """
+//				Menu interativo:
+//				[1]\tLogar como funcionário
+//				[2]\tLogar como gerente
+//				[3]\tLogar como diretor
+//				[4]\tLogar como presidente
+//				[5]\tLogar como cliente
+//				[7]\tSair
+//				Digite uma opção:
+//				""");
+//
+//		int key = sc.nextInt();
+//
+//		switch (key) {
+//		case 1:
+//			Util.customizer();
+////			logger.log(Level.INFO, "Bem-Vindo " + escravo.getNome() + "");
+//			menuFuncionario();
+//			break;
+//		case 2:
+//			Util.customizer();
+////			logger.log(Level.INFO, "Bem-Vindo" + trabalhador.getNome() + "");
+//			menuGerente();
+//			break;
+//		case 3:
+//			Util.customizer();
+//			logger.log(Level.INFO, "Logado com sucesso!");
+//			menuDiretor();
+//			break;
+//		case 4:
+//			Util.customizer();
+//			logger.log(Level.INFO, "Logado com sucesso!");
+//			menuPresidente();
+//			break;
+//		case 5:
+//			Util.customizer();
+//			autenticacaoController.login();
+//			logger.log(Level.INFO, "Logado com sucesso!");
+////			menuCliente();
+//			break;
+//		case 6:
+//			Util.customizer();
+//			logger.log(Level.INFO, "Sessão encerrada!");
+//			break;
+//		default:
+//			logger.log(Level.INFO, "Opção inválida");
+//			menuLogin();
+//		}
+//	}
 
 	public static void menuCadastro() throws IOException {
 
@@ -272,11 +279,14 @@ public class MenuService {
 			break;
 		case 2:
 			Util.customizer();
-			logger.log(Level.INFO, "Relatórios gerados com sucesso!");
+			contacliente.tributosconta();
+			menuCliente();
 			break;
 		case 3:
 			Util.customizer();
-			logger.log(Level.INFO, "Saldo disponível gerado com sucesso!");
+			logger.log(Level.INFO,
+					"Saldo disponível gerado com sucesso!" + " " + "Você tem: " + " " + contacliente.getSaldo());
+			menuCliente();
 			break;
 		case 4:
 			Util.customizer();
@@ -332,29 +342,53 @@ public class MenuService {
 					Menu interativo:
 				[1]\tSaque
 				[2]\tDepósito
-				[3]\tTransferência
-				[4]\tVoltar
-				Digite uma opção:
-				""");
+				[3]\tTransferência""");
+		if(contacliente instanceof ContaPoupanca) {
+			logger.log(Level.INFO, "[4]\tRelatorioContaPoupanca");
+		}
+		logger.log(Level.INFO, "[5]\tVoltar \ndigite uma opção");
+
 
 		int key = sc.nextInt();
 
 		switch (key) {
 		case 1:
+			System.out.println("Digite um valor: ");
 			Util.customizer();
+			double valorsacar = sc.nextDouble();
+			contacliente.sacar(valorsacar);
 			logger.log(Level.INFO, "Saque feito com sucesso!");
+			menuMovimentosContas();
 			break;
 		case 2:
+			System.out.println("Digite o valor de deposito: ");
+			double valordepositar = sc.nextDouble();
+			contacliente.depositar(valordepositar);
 			Util.customizer();
 			logger.log(Level.INFO, "Depósito feito com sucesso!");
+			menuMovimentosContas();
 			break;
 		case 3:
-			Util.customizer();
-			logger.log(Level.INFO, "Transferência feita com sucesso!");
+			System.out.println("Digite o cpf do destinatario: ");
+			String cpfdestinatario = sc.next();
+			Conta contadestinatario = usuariosbanco.buscarConta(cpfdestinatario);
+			if (contadestinatario == null) {
+				System.out.println("Não foi! Usuario não encontrado");
+				menuMovimentosContas();
+				break;
+			}
+			System.out.println("Digite um valor: ");
+			Double valortransf = sc.nextDouble();
+			contacliente.transferencia(valortransf, contadestinatario);
+			menuMovimentosContas();
 			break;
 		case 4:
+			if(contacliente instanceof ContaPoupanca) {
+				((ContaPoupanca) contacliente).simularpoupanca();
+			}
+		case 5:
 			Util.customizer();
-			logger.log(Level.INFO, "Sessão encerrada!");
+			menuCliente();
 			break;
 		default:
 			logger.log(Level.INFO, "Opção inválida");
@@ -362,6 +396,11 @@ public class MenuService {
 		}
 	}
 
+	public void setuser(Cliente cliente, Conta conta, Usuarios usuarios) {
+		clientelogado = cliente;
+		contacliente = conta;
+		usuariosbanco = usuarios;
+	}
 }
 //		Scanner sc = new Scanner(System.in);
 //		

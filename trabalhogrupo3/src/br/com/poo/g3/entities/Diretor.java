@@ -1,5 +1,6 @@
 package br.com.poo.g3.entities;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,10 +17,14 @@ public class Diretor extends Funcionario {
 
 	}
 
-	public Diretor(Integer numeroDaConta, Double saldo, Integer id, String nome, String cpf, Double salario,
-			String senha, TipoPessoa cargo) {
-		super(numeroDaConta, saldo, id, nome, cpf, salario, senha, cargo);
+
+
+	public Diretor(Integer id, String nome, LocalDate dataNasc, String cpf, String senha, Double salario,
+			TipoPessoa cargo) {
+		super(id, nome, dataNasc, cpf, senha, salario, cargo);
 	}
+
+
 
 	public static Map<Integer, Diretor> getMapaDiretores() {
 		return mapaDiretores;
