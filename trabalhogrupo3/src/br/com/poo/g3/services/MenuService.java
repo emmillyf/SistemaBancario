@@ -156,7 +156,7 @@ public class MenuService {
 		switch (key) {
 		case 1:
 			Util.customizer();
-			logger.log(Level.INFO, String.valueOf(trabalhador.getNumeroDeFuncionarios()));
+			// retirei o logger pq deletamos o atributo "nmero de funcionarios"
 
 			break;
 		case 2:
