@@ -149,6 +149,7 @@ public class MenuService {
 			Util.customizer();
 			logger.log(Level.INFO,
 					String.valueOf(usuariosbanco.buscarInformacoesDeClientes(contacliente.getNumeroDaAgencia())));
+			menuDiretor();
 			break;
 		case 2:
 			Util.customizer();
@@ -182,10 +183,12 @@ public class MenuService {
 		case 1:
 			Util.customizer();
 			logger.log(Level.INFO, String.valueOf(usuariosbanco.buscarInformacoesDeDiretores()));
+			menuPresidente();
 			break;
 		case 2:
 			Util.customizer();
 			logger.log(Level.INFO, String.valueOf(usuariosbanco.buscarCapital()));
+			menuPresidente();
 			break;
 		case 3:
 			Util.customizer();
