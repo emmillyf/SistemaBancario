@@ -5,9 +5,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import br.com.poo.g3.util.Util;
 
 public abstract class Conta {
-
+	static Logger logger = Util.setupLogger();
 	// buscar uma lógica que
 	private static int contadorDeContas = 1;
 	// toda vez que uma conta for criada, um número é atribuido à ela
@@ -41,11 +45,11 @@ public abstract class Conta {
 		saldo -= 0.10;
 		tributos += 0.10;
 
-		System.out.println("----------------------------");
-		System.out.printf("Saldo anterior: R$%.2f\n", (saldo - valorInserido));
-		System.out.printf("Valor Depositado: R$%.2f\n", valorInserido);
-		System.out.printf("Saldo atual: R$%.2f\n", saldo);
-		System.out.println("-----------------------------");
+		 logger.log(Level.INFO, "----------------------------");
+		 logger.log(Level.INFO, "Saldo anterior: R$%.2f\n", (saldo - valorInserido));
+		 logger.log(Level.INFO, "Valor Depositado: R$%.2f\n", valorInserido);
+		 logger.log(Level.INFO, "Saldo atual: R$%.2f\n", saldo);
+		 logger.log(Level.INFO, "-----------------------------");
 	}
 
 	public boolean sacar(double valorInserido) {
@@ -54,17 +58,17 @@ public abstract class Conta {
 			saldo -= 0.10;
 			tributos += 0.10;
 
-			System.out.println("-----------------------------");
-			System.out.printf("Saldo anterior: R$%.2f\n", (saldo + valorInserido));
-			System.out.printf("Valor do saque: R$%.2f\n", valorInserido);
-			System.out.printf("Saldo atual: R$%.2f\n", saldo);
-			System.out.println("-----------------------------");
+			 logger.log(Level.INFO, "-----------------------------");
+			 logger.log(Level.INFO, "Saldo anterior: R$%.2f\n", (saldo + valorInserido));
+			 logger.log(Level.INFO, "Valor do saque: R$%.2f\n", valorInserido);
+			 logger.log(Level.INFO, "Saldo atual: R$%.2f\n", saldo);
+			 logger.log(Level.INFO,"-----------------------------");
 
 			return true;
 		} else {
-			System.out.println("-------------------");
-			System.out.println("Saldo insuficiente!");
-			System.out.println("-------------------");
+			 logger.log(Level.INFO, "-------------------");
+			 logger.log(Level.INFO, "Saldo insuficiente!");
+			 logger.log(Level.INFO, "-------------------");
 			return false;
 		}
 	}
@@ -76,26 +80,26 @@ public abstract class Conta {
 			saldo = saldo - 0.20;
 			tributos += 0.20;
 
-			System.out.println("-----------------------------");
-			System.out.printf("O valor a ser transferido é: R$%.2f\n", valorInserido);
-			System.out.println("Destinatario: " + destinatario.getCpf());
-			System.out.printf("O seu saldo atual é: R$%.2f\n", saldo);
-			System.out.println("-----------------------------");
+			 logger.log(Level.INFO, "-----------------------------");
+			 logger.log(Level.INFO, "O valor a ser transferido é: R$%.2f\n", valorInserido);
+			 logger.log(Level.INFO, "Destinatario: " + destinatario.getCpf());
+			 logger.log(Level.INFO, "O seu saldo atual é: R$%.2f\n", saldo);
+			 logger.log(Level.INFO, "-----------------------------");
 
 			return true;
 		} else {
-			System.out.println("-------------------");
-			System.out.println("Saldo insuficiente!");
-			System.out.println("-------------------");
+			 logger.log(Level.INFO, "-------------------");
+			 logger.log(Level.INFO, "Saldo insuficiente!");
+			 logger.log(Level.INFO, "-------------------");
 			return false;
 		}
 	}
 
 	public void tributosconta() throws IOException {
 
-		System.out.println("--------------------------------------------------------");
-		System.out.printf("O total de tributos que voce pagou foi de: R$%.2f\n", tributos);
-		System.out.println("--------------------------------------------------------");
+		logger.log(Level.INFO, "--------------------------------------------------------");
+		logger.log(Level.INFO, "O total de tributos que voce pagou foi de: R$%.2f\n", tributos);
+		logger.log(Level.INFO, "--------------------------------------------------------");
 
 	}
 

@@ -6,11 +6,16 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import br.com.poo.g3.GrupoApplication;
 import br.com.poo.g3.controller.AutenticacaoController;
 import br.com.poo.g3.entities.Cliente;
 import br.com.poo.g3.entities.Conta;
 import br.com.poo.g3.entities.ContaPoupanca;
+import br.com.poo.g3.entities.Diretor;
+import br.com.poo.g3.entities.Gerente;
+import br.com.poo.g3.entities.Presidente;
 import br.com.poo.g3.entities.Usuarios;
+import br.com.poo.g3.enums.TipoPessoa;
 import br.com.poo.g3.util.Util;
 
 public class MenuService {
@@ -20,128 +25,58 @@ public class MenuService {
 	static Cliente clientelogado;
 	static Usuarios usuariosbanco;
 	static Conta contacliente;
-//	static Funcionario escravo = new Funcionario(198, 77.00, 1, "Amanda da silva", "666.666.666-99", 33.00, "4444",
-//			TipoPessoa.FUNCIONARIO);
-//	static Gerente trabalhador = new Gerente(200, 8888.00, 2, "Lucas da silva", "777.777.777-77", 1000.00, "9999",
-//			TipoPessoa.GERENTE);
-//
-//	static FuncionarioService funcionarios = new FuncionarioService();
-//	static Diretor puxaSaco = new Diretor(6969, 800.00, 6, "Nicolas da silva", "696.969.696-69", 6500.70, "9898",
-//			TipoPessoa.DIRETOR);
+	static GrupoApplication main = new GrupoApplication();
 
-//	public static void menuInicial() throws IOException, InterruptedException {
-//
-//		Util.customizer();
-//		logger.log(Level.INFO, """
-//				Menu interativo:
-//				[1]\tLogin
-//				[2]\tCadastro
-//				[3]\tSair
-//				Digite uma opção:
-//				""");
-//
-//		int key = sc.nextInt();
-//
-//		switch (key) {
-//		case 1:
-//			Util.customizer();
-//			menuLogin();
-//			break;
-//		case 2:
-//			Util.customizer();
-//			logger.log(Level.INFO, "Cadastrado com sucesso!");
-//			menuCadastro();
-//			break;
-//		case 3:
-//			Util.customizer();
-//			logger.log(Level.INFO, "Sessão encerrada!");
-//			break;
-//		default:
-//			logger.log(Level.INFO, "Opção inválida");
-//			menuInicial();
-//		}
-//	}
-
-//	public static void menuLogin() throws IOException, InterruptedException {
-//		Util.customizer();
-//		logger.log(Level.INFO, """
-//				Menu interativo:
-//				[1]\tLogar como funcionário
-//				[2]\tLogar como gerente
-//				[3]\tLogar como diretor
-//				[4]\tLogar como presidente
-//				[5]\tLogar como cliente
-//				[7]\tSair
-//				Digite uma opção:
-//				""");
-//
-//		int key = sc.nextInt();
-//
-//		switch (key) {
-//		case 1:
-//			Util.customizer();
-////			logger.log(Level.INFO, "Bem-Vindo " + escravo.getNome() + "");
-//			menuFuncionario();
-//			break;
-//		case 2:
-//			Util.customizer();
-////			logger.log(Level.INFO, "Bem-Vindo" + trabalhador.getNome() + "");
-//			menuGerente();
-//			break;
-//		case 3:
-//			Util.customizer();
-//			logger.log(Level.INFO, "Logado com sucesso!");
-//			menuDiretor();
-//			break;
-//		case 4:
-//			Util.customizer();
-//			logger.log(Level.INFO, "Logado com sucesso!");
-//			menuPresidente();
-//			break;
-//		case 5:
-//			Util.customizer();
-//			autenticacaoController.login();
-//			logger.log(Level.INFO, "Logado com sucesso!");
-////			menuCliente();
-//			break;
-//		case 6:
-//			Util.customizer();
-//			logger.log(Level.INFO, "Sessão encerrada!");
-//			break;
-//		default:
-//			logger.log(Level.INFO, "Opção inválida");
-//			menuLogin();
-//		}
-//	}
-
-	public static void menuCadastro() throws IOException {
+	public static void menuCadastro() throws IOException, InterruptedException {
 
 		Util.customizer();
 		logger.log(Level.INFO, """
 				Menu interativo:
 				[1]\tCriar conta poupança
-				[2]\tCriar conta corrente
-				[3]\tSair
-				Digite uma opção:
-				""");
-		
+				[2]\tCriar conta corrente""");
+		if (clientelogado instanceof Diretor || clientelogado instanceof Presidente) {
+			logger.log(Level.INFO, "[3]\tCadastroDeGerente");
+		}
+		if (clientelogado instanceof Presidente) {
+			logger.log(Level.INFO, "[4]\tCadastroDeDiretor");
+		}
+		logger.log(Level.INFO, "[0]\tSair \ndigite uma opção");
 		int key = sc.nextInt();
 
 		switch (key) {
-		case 1:			
-			String nome;
-			String cpf;
-			LocalDate dataNasc;
-			Integer numeroDaAgencia;
-			String senha;
-			
-			
+		case 1:
+			Util.customizer();
+			Cliente cliente = autenticacaoController.cadastrarCliente();
+			Conta conta = autenticacaoController.cadastrarContaPoupanca(cliente.getCpf());
+			usuariosbanco.CadastrarContaClientes(cliente, conta);
+			main.menuInicial(usuariosbanco);
 			break;
 		case 2:
 			Util.customizer();
-			logger.log(Level.INFO, "Conta corrente criada com sucesso!");
+			Cliente cliente2 = autenticacaoController.cadastrarCliente();
+			Conta conta2 = autenticacaoController.cadastrarContaCorrente(cliente2.getCpf());
+			usuariosbanco.CadastrarContaClientes(cliente2, conta2);
 			break;
 		case 3:
+			if (clientelogado instanceof Diretor || clientelogado instanceof Presidente) {
+				Util.customizer();
+				Gerente gerente = autenticacaoController.cadastrarGerente();
+				Conta contaGerente = autenticacaoController.cadastrarContaCorrente(gerente.getCpf());
+				usuariosbanco.CadastrarContaGerentes(gerente, contaGerente);
+				main.menuInicial(usuariosbanco);
+			}else {
+				logger.log(Level.INFO, "opção inválida =) ");
+			}
+		case 4:
+			if (clientelogado instanceof Presidente) {
+			Diretor diretor = autenticacaoController.cadastrarDiretor();
+			Conta contaDiretor = autenticacaoController.cadastrarContaCorrente(diretor.getCpf());
+			usuariosbanco.CadastrarContaDiretor(diretor, contaDiretor);
+			main.menuInicial(usuariosbanco);
+			}else {
+				logger.log(Level.INFO, "opção inválida =) ");
+			}
+		case 0:
 			Util.customizer();
 			logger.log(Level.INFO, "Sessão encerrada!");
 			break;
@@ -151,7 +86,7 @@ public class MenuService {
 		}
 	}
 
-	public static void menuGerente() throws IOException {
+	public static void menuGerente() throws IOException, InterruptedException {
 
 		Util.customizer();
 		logger.log(Level.INFO, """
@@ -159,8 +94,8 @@ public class MenuService {
 				[1]\tConsultar total de contas
 				[2]\tConsultar informações das contas
 				[3]\tSaldo disponível
-				[4]\tCadastrar conta
-				[5]\tSair
+				[4]\tMenu cadastro
+				[0]\tSair
 				Digite uma opção:
 				""");
 
@@ -171,21 +106,24 @@ public class MenuService {
 			Util.customizer();
 			logger.log(Level.INFO, "Total de contas na agência: "
 					+ usuariosbanco.buscarTotalContasPorAgencia(contacliente.getNumeroDaAgencia()));
+			menuGerente();
 			break;
 		case 2:
 			Util.customizer();
 			logger.log(Level.INFO, String
 					.valueOf(usuariosbanco.buscarInformacoesDeContasPorAgencia(contacliente.getNumeroDaAgencia())));
+			menuGerente();
 			break;
 		case 3:
 			Util.customizer();
 			logger.log(Level.INFO, String.valueOf(contacliente.getSaldo()));
+			menuGerente();
 			break;
 		case 4:
 			Util.customizer();
 			menuCadastro();
 			break;
-		case 5:
+		case 0:
 			Util.customizer();
 			logger.log(Level.INFO, "Sessão encerrada.");
 			break;
@@ -195,30 +133,28 @@ public class MenuService {
 		}
 	}
 
-	public static void menuDiretor() throws IOException {
+	public static void menuDiretor() throws IOException, InterruptedException {
 
 		Util.customizer();
 		logger.log(Level.INFO, """
-				[1]\tMenu conta
-				[2]\tConsultar clientes
-				[3]\tSair
+				[1]\tRelatorios
+				[2]\tMenuCadastro
+				[0]\tSair
 				Digite uma opção:
 				""");
-
 		int key = sc.nextInt();
 
 		switch (key) {
 		case 1:
 			Util.customizer();
-			logger.log(Level.INFO, "Usuário selecionou a opção 1");
-			menuCliente();
-			break;
-		case 2:
-			Util.customizer();
 			logger.log(Level.INFO,
 					String.valueOf(usuariosbanco.buscarInformacoesDeClientes(contacliente.getNumeroDaAgencia())));
 			break;
-		case 3:
+		case 2:
+			Util.customizer();
+			menuCadastro();
+			break;
+		case 0:
 			Util.customizer();
 			logger.log(Level.INFO, "Sessão encerrada.");
 			break;
@@ -228,14 +164,15 @@ public class MenuService {
 		}
 	}
 
-	public static void menuPresidente() throws IOException {
+	public static void menuPresidente() throws IOException, InterruptedException {
 
 		Util.customizer();
 		logger.log(Level.INFO, """
 					Menu interativo
 				[1]\tConsultar informações dos diretores
 				[2]\tConsultar total do capital
-				[3]\tVoltar
+				[3]\tMenu Cadastro
+				[0]\tVoltar
 				Digite uma opção:
 				""");
 
@@ -251,6 +188,10 @@ public class MenuService {
 			logger.log(Level.INFO, String.valueOf(usuariosbanco.buscarCapital()));
 			break;
 		case 3:
+			Util.customizer();
+			menuCadastro();
+			break;
+		case 0:
 			Util.customizer();
 			logger.log(Level.INFO, "Sessão encerrada!");
 			break;
@@ -305,7 +246,7 @@ public class MenuService {
 
 		Util.customizer();
 		logger.log(Level.INFO, """
-				
+
 				[1]\tMenu cliente
 				[2]\tConsultar salário
 				[3]\tvoltar
@@ -393,31 +334,9 @@ public class MenuService {
 		}
 	}
 
-	public void setuser(Cliente cliente, Conta conta, Usuarios usuarios) {
+	public static void setuser(Cliente cliente, Conta conta, Usuarios usuarios) {
 		clientelogado = cliente;
 		contacliente = conta;
 		usuariosbanco = usuarios;
 	}
 }
-//		Scanner sc = new Scanner(System.in);
-//		
-//		String sysCpf = "995.866.968-47";
-//		String sysSenha = "1456";
-//		
-//		
-//		System.out.print("Insira seu cpf: ");
-//		String Cpf = sc.next();
-//		
-//		System.out.print("Insira sua senha: ");
-//		String Senha = sc.next();
-//		Util.customizer();
-//		if(sysCpf.equals(Cpf)) {
-//			if(sysSenha.equals(Senha)) {
-//				System.out.print("Bem vindo, presidente");
-//			}else {
-//				System.out.print("Cheque sua senha");
-//			}
-//			
-//		}else {
-//			System.out.print("Por favor, cheque seu cpf");
-//		}

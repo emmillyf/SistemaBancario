@@ -19,12 +19,12 @@ public class GrupoApplication {
     static MenuService menuService = new MenuService();
     static AutenticacaoController autenticacaoController = new AutenticacaoController();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Usuarios usuarios = RelatorioIO.leitor("banco");
         menuInicial(usuarios);
     }
 
-    public static void menuInicial(Usuarios usuarios) throws IOException {
+    public static void menuInicial(Usuarios usuarios) throws IOException, InterruptedException {
 
         Util.customizer();
         logger.log(Level.INFO, """
@@ -51,7 +51,7 @@ public class GrupoApplication {
         }
     }
 
-    public static void menuLogin(Usuarios usuarios) throws IOException {
+    public static void menuLogin(Usuarios usuarios) throws IOException, InterruptedException {
         Util.customizer();
         logger.log(Level.INFO, """
                 Menu interativo:

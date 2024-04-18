@@ -175,5 +175,16 @@ public class Usuarios {
 		}
 		return null;
 	}
-
+	public void CadastrarContaClientes(Cliente cliente, Conta conta) {
+		clientes.put(cliente.getCpf(), cliente);
+		contas.put(cliente.getCpf(), conta);
+	}
+	public void CadastrarContaGerentes(Gerente gerente, Conta conta) {
+		gerentes.put(gerente.getCpf(), gerente);
+		contas.put(gerente.getCpf(), conta);
+	}
+	public void CadastrarContaDiretor(Diretor diretor, Conta conta) {
+		diretores.put(diretor.getCpf(), diretor);
+		contas.put(diretor.getCpf(), conta);
+	}
 }

@@ -5,6 +5,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import br.com.poo.g3.entities.Cliente;
+import br.com.poo.g3.entities.ContaCorrente;
+import br.com.poo.g3.entities.ContaPoupanca;
+import br.com.poo.g3.entities.Diretor;
+import br.com.poo.g3.entities.Gerente;
 import br.com.poo.g3.entities.Usuarios;
 import br.com.poo.g3.enums.TipoPessoa;
 import br.com.poo.g3.services.AutenticacaoService;
@@ -30,5 +34,20 @@ public class AutenticacaoController {
 			}
 		} while (cliente == null);
 		return cliente;
+	}
+	public Cliente cadastrarCliente() throws IOException, InterruptedException {
+		return autenticacaoService.cadastrarCliente();
+	}
+	public ContaPoupanca cadastrarContaPoupanca(String cpf) throws IOException, InterruptedException {
+		return autenticacaoService.cadastrarContaPoupanca(cpf);
+	}
+	public ContaCorrente cadastrarContaCorrente(String cpf) throws IOException, InterruptedException {
+		return autenticacaoService.cadastrarContaCorrente(cpf);
+	}
+	public Gerente cadastrarGerente() throws IOException, InterruptedException {
+		return autenticacaoService.cadastrarGerente();
+	}
+	public Diretor cadastrarDiretor() throws IOException, InterruptedException {
+		return autenticacaoService.cadastrarDiretor();
 	}
 }

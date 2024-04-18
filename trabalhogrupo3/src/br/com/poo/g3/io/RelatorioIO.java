@@ -1,7 +1,9 @@
 package br.com.poo.g3.io;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -172,23 +174,3 @@ public class RelatorioIO extends Funcionario {
 		return usuarios;
 	}
 }
-
-//	public static void escritor(String path) throws IOException {
-//		Scanner sc = new Scanner(System.in);
-//		Util.customizer();
-//		logger.log(Level.INFO, () -> "Escreva o nome do arquivo: ");
-//		String nome = sc.next();
-//
-//		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(PATH_BASICO + nome + EXTENSAO, true));
-//		String linha = "";
-//
-//		Util.customizer();
-//		logger.log(Level.INFO, () -> "Escreva algo: ");
-//		Scanner sc1 = new Scanner(System.in);
-//		linha = sc1.nextLine();
-//		buffWrite.append(linha + "\n");
-//		buffWrite.close();
-//		sc.close();
-//		sc1.close();
-//
-//	}

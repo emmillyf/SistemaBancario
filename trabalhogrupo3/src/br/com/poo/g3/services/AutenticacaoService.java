@@ -1,25 +1,34 @@
 package br.com.poo.g3.services;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import br.com.poo.g3.entities.Cliente;
+import br.com.poo.g3.entities.ContaCorrente;
+import br.com.poo.g3.entities.ContaPoupanca;
 import br.com.poo.g3.entities.Diretor;
 import br.com.poo.g3.entities.Funcionario;
 import br.com.poo.g3.entities.Gerente;
 import br.com.poo.g3.entities.Presidente;
 import br.com.poo.g3.entities.Usuarios;
 import br.com.poo.g3.enums.TipoPessoa;
+import br.com.poo.g3.io.RelatorioIO;
 import br.com.poo.g3.util.Util;
 
 public class AutenticacaoService {
 	static Scanner sc = new Scanner(System.in);
 	static Logger logger = Util.setupLogger();
 	Usuarios users = new Usuarios();
+	static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-	public Cliente credenciais(Usuarios usuarios, TipoPessoa tipo) {
+	public Cliente credenciais(Usuarios usuarios, TipoPessoa tipo) throws InterruptedException, IOException {
 		users = usuarios;
 		Util.customizer();
 		logger.log(Level.INFO, "Digite seu cpf: ");
@@ -92,5 +101,77 @@ public class AutenticacaoService {
 			}
 		}
 		return null;	
+	}
+	
+	public Cliente cadastrarCliente() {
+		Util.customizer();
+		Random random = new Random();
+		Integer id = random.nextInt(100);
+		logger.log(Level.INFO, "Digite o nome: ");
+		String nome = sc.nextLine();
+		logger.log(Level.INFO, "Digite o cpf: ");
+		String cpf = sc.nextLine();
+		logger.log(Level.INFO, "Digite a dataNasc: ");
+		LocalDate dtNasc = LocalDate.parse(sc.nextLine(), dtf);
+		logger.log(Level.INFO, "Digite a senha: ");
+		String senha = sc.nextLine();
+		Cliente cliente = new Cliente(id, nome, dtNasc, cpf, senha);
+		System.out.println(cliente.getCpf());
+		System.out.println(cliente.getSenha());
+		return cliente;
+	}
+	public Gerente cadastrarGerente() {
+		Util.customizer();
+		Random random = new Random();
+		Integer id = random.nextInt(100);
+		logger.log(Level.INFO, "Digite o nome: ");
+		String nome = sc.nextLine();
+		logger.log(Level.INFO, "Digite o cpf: ");
+		String cpf = sc.nextLine();
+		logger.log(Level.INFO, "Digite a dataNasc: ");
+		LocalDate dtNasc = LocalDate.parse(sc.nextLine(), dtf);
+		logger.log(Level.INFO, "Digite a senha: ");
+		String senha = sc.nextLine();
+		logger.log(Level.INFO, "Digite o salario: ");
+		Double salario = sc.nextDouble();
+		Gerente gerente = new Gerente(id, nome, dtNasc, cpf, senha, salario, TipoPessoa.GERENTE);
+		System.out.println(gerente.getCpf());
+		System.out.println(gerente.getSenha());
+		return gerente;
+	}
+	public Diretor cadastrarDiretor() {
+		Util.customizer();
+		Random random = new Random();
+		Integer id = random.nextInt(100);
+		logger.log(Level.INFO, "Digite o nome: ");
+		String nome = sc.nextLine();
+		logger.log(Level.INFO, "Digite o cpf: ");
+		String cpf = sc.nextLine();
+		logger.log(Level.INFO, "Digite a dataNasc: ");
+		LocalDate dtNasc = LocalDate.parse(sc.nextLine(), dtf);
+		logger.log(Level.INFO, "Digite a senha: ");
+		String senha = sc.nextLine();
+		logger.log(Level.INFO, "Digite o salario: ");
+		Double salario = sc.nextDouble();
+		Diretor diretor = new Diretor(id, nome, dtNasc, cpf, senha, salario, TipoPessoa.DIRETOR);
+		return diretor;
+	}
+	public ContaCorrente cadastrarContaCorrente(String cpf) {
+		Util.customizer();
+		Random random = new Random();
+		Integer numerodaconta = random.nextInt(100);
+		logger.log(Level.INFO, "Digite a numeroDaAgencia: ");
+		Integer numeroDaAgencia = sc.nextInt();
+		ContaCorrente contaCorrente = new ContaCorrente(numerodaconta, 0.00, numeroDaAgencia, cpf);
+		return contaCorrente;
+	}
+	public ContaPoupanca cadastrarContaPoupanca(String cpf) {
+		Util.customizer();
+		Random random = new Random();
+		Integer numerodaconta = random.nextInt(100);
+		logger.log(Level.INFO, "Digite a numeroDaAgencia: ");
+		Integer numeroDaAgencia = sc.nextInt();
+		ContaPoupanca contaPoupanca = new ContaPoupanca(numerodaconta, 0.00, numeroDaAgencia, cpf);
+	return contaPoupanca;
 	}
 }
