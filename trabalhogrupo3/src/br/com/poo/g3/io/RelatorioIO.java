@@ -1,16 +1,12 @@
 package br.com.poo.g3.io;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import br.com.poo.g3.entities.Cliente;
 import br.com.poo.g3.entities.Conta;
@@ -29,7 +25,6 @@ public class RelatorioIO extends Funcionario {
 
 	static final String PATH_BASICO = "./temp/";
 	static final String EXTENSAO = ".txt";
-	private static Logger logger = Util.setupLogger();
 	static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	public static Usuarios leitor(String path) throws IOException {
@@ -43,8 +38,7 @@ public class RelatorioIO extends Funcionario {
 		Map<String, Diretor> novodiretor = new HashMap<>();
 		Map<String, Cliente> novocliente = new HashMap<>();
 		Map<String, Conta> novaconta = new HashMap<>();
-		// definir 4 listas vazias, uma para cada agencia
-		// Exemplo: List<Conta> agencia1 = new ArrayList<>();
+
 
 		while (isFinish) {
 			linha = buffRead.readLine();
@@ -53,10 +47,7 @@ public class RelatorioIO extends Funcionario {
 				String[] dados = linha.split(";");
 
 				if (dados[0].equalsIgnoreCase(TipoPessoa.GERENTE.name())) {
-					// private Integer id;
-					// private String nome;
-					// private String cpf;
-					// private Double salario;
+
 					Gerente gerente = new Gerente(Integer.parseInt(dados[1]), dados[2], LocalDate.parse(dados[3], dtf),
 							dados[4], dados[6], Double.parseDouble(dados[5]), TipoPessoa.GERENTE);
 
@@ -75,13 +66,9 @@ public class RelatorioIO extends Funcionario {
 
 					novogerente.put(dados[4], gerente);
 
-//					logger.log(Level.INFO, gerente::toString);
 
 				} else if (dados[0].equalsIgnoreCase(TipoPessoa.DIRETOR.name())) {
-					// private Integer id;
-					// private String nome;
-					// private String cpf;
-					// private Double salario;
+		
 					Diretor diretor = new Diretor(Integer.parseInt(dados[1]), dados[2], LocalDate.parse(dados[3], dtf),
 							dados[4], dados[6], Double.parseDouble(dados[5]), TipoPessoa.DIRETOR);
 
@@ -99,13 +86,10 @@ public class RelatorioIO extends Funcionario {
 
 					}
 					novodiretor.put(dados[4], diretor);
-//					logger.log(Level.INFO, diretor::toString);
+
 
 				} else if (dados[0].equalsIgnoreCase(TipoPessoa.PRESIDENTE.name())) {
-					// private Integer id;
-					// private String nome;
-					// private String cpf;
-					// private Double salario;
+				
 					Presidente presidente = new Presidente(Integer.parseInt(dados[1]), dados[2],
 							LocalDate.parse(dados[3], dtf), dados[4], dados[6], Double.parseDouble(dados[5]),
 							TipoPessoa.PRESIDENTE);
@@ -124,22 +108,16 @@ public class RelatorioIO extends Funcionario {
 					}
 					novopresidente.put(dados[4], presidente);
 				} else if (dados[0].equalsIgnoreCase(TipoPessoa.FUNCIONARIO.name())) {
-					// private Integer id;
-//				private String nome;
-//				private String cpf;
-//				private Double salario;
+				
 					Funcionario funcionario = new Funcionario(Integer.parseInt(dados[1]), dados[2],
 							LocalDate.parse(dados[3], dtf), dados[4], dados[6], Double.parseDouble(dados[5]),
 							TipoPessoa.FUNCIONARIO);
 
 					novofuncionario.put(dados[4], funcionario);
-//					logger.log(Level.INFO, funcionario::toString);
+
 
 				} else if (dados[0].equalsIgnoreCase(TipoPessoa.CLIENTE.name())) {
-					// private Integer id;
-					// private String nome;
-					// private LocalDate dataNasc;
-					// private String email;
+					
 					Cliente cliente = new Cliente(Integer.parseInt(dados[1]), dados[2], LocalDate.parse(dados[3], dtf),
 							dados[4], dados[5]);
 
@@ -155,7 +133,7 @@ public class RelatorioIO extends Funcionario {
 
 					}
 					novocliente.put(dados[4], cliente);
-//					logger.log(Level.INFO, cliente::toString);
+
 				}
 			} else {
 				usuarios.setClientes(novocliente);

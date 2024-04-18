@@ -1,5 +1,10 @@
 package br.com.poo.g3;
 
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import br.com.poo.g3.controller.AutenticacaoController;
 import br.com.poo.g3.entities.Cliente;
 import br.com.poo.g3.entities.Usuarios;
@@ -7,11 +12,6 @@ import br.com.poo.g3.enums.TipoPessoa;
 import br.com.poo.g3.io.RelatorioIO;
 import br.com.poo.g3.services.MenuService;
 import br.com.poo.g3.util.Util;
-
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class GrupoApplication {
     static Logger logger = Util.setupLogger();

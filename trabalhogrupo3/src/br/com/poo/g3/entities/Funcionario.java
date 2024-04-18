@@ -13,14 +13,14 @@ public class Funcionario extends Cliente {
 
 	static Map<Integer, Funcionario> mapaFuncionarios = new HashMap<>();
 
-	// construtor default
+
 
 	public Funcionario() {
 		super();
 
 	}
 
-	// construtor parametrizado
+
 
 	public Funcionario(Integer id, String nome, LocalDate dataNasc, String cpf, String senha, Double salario,
 			TipoPessoa cargo) {

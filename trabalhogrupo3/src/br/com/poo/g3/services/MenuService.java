@@ -1,7 +1,6 @@
 package br.com.poo.g3.services;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +14,6 @@ import br.com.poo.g3.entities.Diretor;
 import br.com.poo.g3.entities.Gerente;
 import br.com.poo.g3.entities.Presidente;
 import br.com.poo.g3.entities.Usuarios;
-import br.com.poo.g3.enums.TipoPessoa;
 import br.com.poo.g3.util.Util;
 
 public class MenuService {
