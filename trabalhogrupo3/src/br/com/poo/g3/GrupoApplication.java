@@ -20,12 +20,25 @@ public class GrupoApplication {
     static AutenticacaoController autenticacaoController = new AutenticacaoController();
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        Usuarios usuarios = RelatorioIO.leitor("banco");
+    	Util.customizer();
+    	logger.log(Level.INFO,
+        		
+        		"""
+██████   █████  ███    ██  ██████  ██████      ███████ ███████ ██████  ██████   █████  ████████ ███████  ██████ 
+██   ██ ██   ██ ████   ██ ██      ██    ██     ██      ██      ██   ██ ██   ██ ██   ██    ██    ██      ██      
+██████  ███████ ██ ██  ██ ██      ██    ██     ███████ █████   ██████  ██████  ███████    ██    █████   ██      
+██   ██ ██   ██ ██  ██ ██ ██      ██    ██          ██ ██      ██   ██ ██   ██ ██   ██    ██    ██      ██      
+██████  ██   ██ ██   ████  ██████  ██████      ███████ ███████ ██   ██ ██   ██ ██   ██    ██    ███████  ██████ 
+                                                                                                                                                                                                                         
+                                                                                                                                                                             
+ """);
+    	Usuarios usuarios = RelatorioIO.leitor("banco");
         menuInicial(usuarios);
     }
 
     public static void menuInicial(Usuarios usuarios) throws IOException, InterruptedException {
-
+    	
+    	
         Util.customizer();
         logger.log(Level.INFO, """
                 Menu interativo:

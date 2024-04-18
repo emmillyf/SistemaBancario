@@ -88,13 +88,13 @@ public class RelatorioIO extends Funcionario {
 					if ((dados[7].equalsIgnoreCase(TipoConta.CONTA_CORRENTE.name()))) {
 						ContaCorrente contaCorrente = new ContaCorrente(Integer.parseInt(dados[8]),
 								Double.parseDouble(dados[9]), Integer.parseInt(dados[10]), dados[4]);
-						System.out.println(dados[4]);
+						
 						novaconta.put(dados[4], contaCorrente);
 					}
 					if ((dados[7].equalsIgnoreCase(TipoConta.CONTA_POUPANCA.name()))) {
 						ContaPoupanca contaPoupanca = new ContaPoupanca(Integer.parseInt(dados[8]),
 								Double.parseDouble(dados[9]), Integer.parseInt(dados[10]), dados[4]);
-						System.out.println(dados[4]);
+
 						novaconta.put(dados[4], contaPoupanca);
 
 					}
@@ -123,7 +123,6 @@ public class RelatorioIO extends Funcionario {
 
 					}
 					novopresidente.put(dados[4], presidente);
-					logger.log(Level.INFO, presidente::toString);
 				} else if (dados[0].equalsIgnoreCase(TipoPessoa.FUNCIONARIO.name())) {
 					// private Integer id;
 //				private String nome;
