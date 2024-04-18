@@ -1,6 +1,7 @@
 package br.com.poo.g3.services;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -123,13 +124,18 @@ public class MenuService {
 				[3]\tSair
 				Digite uma opção:
 				""");
-
+		
 		int key = sc.nextInt();
 
 		switch (key) {
-		case 1:
-			Util.customizer();
-			logger.log(Level.INFO, "Conta poupança criada com sucesso!");
+		case 1:			
+			String nome;
+			String cpf;
+			LocalDate dataNasc;
+			Integer numeroDaAgencia;
+			String senha;
+			
+			
 			break;
 		case 2:
 			Util.customizer();
@@ -151,9 +157,10 @@ public class MenuService {
 		logger.log(Level.INFO, """
 					Menu interativo:
 				[1]\tConsultar total de contas
-				[2]\tConsultar funcionários
+				[2]\tConsultar informações das contas
 				[3]\tSaldo disponível
-				[4]\tVoltar
+				[4]\tCadastrar conta
+				[5]\tSair
 				Digite uma opção:
 				""");
 
@@ -162,20 +169,25 @@ public class MenuService {
 		switch (key) {
 		case 1:
 			Util.customizer();
-			// retirei o logger pq deletamos o atributo "nmero de funcionarios"
-
+			logger.log(Level.INFO, "Total de contas na agência: "
+					+ usuariosbanco.buscarTotalContasPorAgencia(contacliente.getNumeroDaAgencia()));
 			break;
 		case 2:
 			Util.customizer();
-//			logger.log(Level.INFO, String.valueOf(funcionarios.listaFuncionarios()));
+			logger.log(Level.INFO, String
+					.valueOf(usuariosbanco.buscarInformacoesDeContasPorAgencia(contacliente.getNumeroDaAgencia())));
 			break;
 		case 3:
 			Util.customizer();
-//			logger.log(Level.INFO, String.valueOf(trabalhador.getSaldo()));
+			logger.log(Level.INFO, String.valueOf(contacliente.getSaldo()));
 			break;
 		case 4:
 			Util.customizer();
-			logger.log(Level.INFO, "Sessão encerrada!");
+			menuCadastro();
+			break;
+		case 5:
+			Util.customizer();
+			logger.log(Level.INFO, "Sessão encerrada.");
 			break;
 		default:
 			logger.log(Level.INFO, "Opção inválida");
@@ -187,12 +199,9 @@ public class MenuService {
 
 		Util.customizer();
 		logger.log(Level.INFO, """
-					Menu interativo:
-				[1]\tConsultar contas
+				[1]\tMenu conta
 				[2]\tConsultar clientes
-				[3]\tConsultar gerentes
-				[4]\tSaldo disponível
-				[5]\tVoltar
+				[3]\tSair
 				Digite uma opção:
 				""");
 
@@ -201,23 +210,17 @@ public class MenuService {
 		switch (key) {
 		case 1:
 			Util.customizer();
-			logger.log(Level.INFO, "Informações geradas com sucesso!");
+			logger.log(Level.INFO, "Usuário selecionou a opção 1");
+			menuCliente();
 			break;
 		case 2:
 			Util.customizer();
-			logger.log(Level.INFO, "Informações geradas com sucesso!");
+			logger.log(Level.INFO,
+					String.valueOf(usuariosbanco.buscarInformacoesDeClientes(contacliente.getNumeroDaAgencia())));
 			break;
 		case 3:
 			Util.customizer();
-			logger.log(Level.INFO, "Informações geradas com sucesso!");
-			break;
-		case 4:
-			Util.customizer();
-//			logger.log(Level.INFO, String.valueOf(puxaSaco.getSaldo()));
-			break;
-		case 5:
-			Util.customizer();
-			logger.log(Level.INFO, "Sessão encerrada!");
+			logger.log(Level.INFO, "Sessão encerrada.");
 			break;
 		default:
 			logger.log(Level.INFO, "Opção inválida");
@@ -229,7 +232,7 @@ public class MenuService {
 
 		Util.customizer();
 		logger.log(Level.INFO, """
-					Menu interativo:
+					Menu interativo
 				[1]\tConsultar informações dos diretores
 				[2]\tConsultar total do capital
 				[3]\tVoltar
@@ -241,11 +244,11 @@ public class MenuService {
 		switch (key) {
 		case 1:
 			Util.customizer();
-			logger.log(Level.INFO, "Informações geradas com sucesso!");
+			logger.log(Level.INFO, String.valueOf(usuariosbanco.buscarInformacoesDeDiretores()));
 			break;
 		case 2:
 			Util.customizer();
-			logger.log(Level.INFO, "Informações geradas com sucesso!");
+			logger.log(Level.INFO, String.valueOf(usuariosbanco.buscarCapital()));
 			break;
 		case 3:
 			Util.customizer();
@@ -302,11 +305,10 @@ public class MenuService {
 
 		Util.customizer();
 		logger.log(Level.INFO, """
-					Menu interativo:
-				[1]\tID do cliente
+				
+				[1]\tMenu cliente
 				[2]\tConsultar salário
-				[3]\tSaldo disponível
-				[4]\tvoltar
+				[3]\tvoltar
 				Digite uma opção:
 				""");
 
@@ -315,17 +317,13 @@ public class MenuService {
 		switch (key) {
 		case 1:
 			Util.customizer();
-//			logger.log(Level.INFO, escravo.getId() + "");
+			menuCliente();
 			break;
 		case 2:
 			Util.customizer();
-//			logger.log(Level.INFO, escravo.getSalario() + "");
+			logger.log(Level.INFO, String.valueOf(usuariosbanco.buscarSalarioFuncionario(clientelogado.getCpf())));
 			break;
 		case 3:
-			Util.customizer();
-//			logger.log(Level.INFO, escravo.getSaldo() + "");
-			break;
-		case 4:
 			Util.customizer();
 			logger.log(Level.INFO, "Sessão encerrada!");
 			break;
@@ -343,11 +341,10 @@ public class MenuService {
 				[1]\tSaque
 				[2]\tDepósito
 				[3]\tTransferência""");
-		if(contacliente instanceof ContaPoupanca) {
+		if (contacliente instanceof ContaPoupanca) {
 			logger.log(Level.INFO, "[4]\tRelatorioContaPoupanca");
 		}
 		logger.log(Level.INFO, "[5]\tVoltar \ndigite uma opção");
-
 
 		int key = sc.nextInt();
 
@@ -383,7 +380,7 @@ public class MenuService {
 			menuMovimentosContas();
 			break;
 		case 4:
-			if(contacliente instanceof ContaPoupanca) {
+			if (contacliente instanceof ContaPoupanca) {
 				((ContaPoupanca) contacliente).simularpoupanca();
 			}
 		case 5:

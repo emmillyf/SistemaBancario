@@ -30,8 +30,7 @@ public class GrupoApplication {
         logger.log(Level.INFO, """
                 Menu interativo:
                 [1]\tLogin
-                [2]\tCadastro
-                [3]\tSair
+                [2]\tSair
                 Digite uma opção:
                 """);
 
@@ -43,11 +42,6 @@ public class GrupoApplication {
                 menuLogin(usuarios);
                 break;
             case 2:
-                Util.customizer();
-                logger.log(Level.INFO, "Cadastrado com sucesso!");
-                menuService.menuCadastro();
-                break;
-            case 3:
                 Util.customizer();
                 logger.log(Level.INFO, "Sessão encerrada!");
                 break;

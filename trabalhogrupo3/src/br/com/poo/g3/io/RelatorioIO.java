@@ -58,6 +58,19 @@ public class RelatorioIO extends Funcionario {
 					Gerente gerente = new Gerente(Integer.parseInt(dados[1]), dados[2], LocalDate.parse(dados[3], dtf),
 							dados[4], dados[6], Double.parseDouble(dados[5]), TipoPessoa.GERENTE);
 
+					if ((dados[7].equalsIgnoreCase(TipoConta.CONTA_CORRENTE.name()))) {
+						ContaCorrente contaCorrente = new ContaCorrente(Integer.parseInt(dados[8]),
+								Double.parseDouble(dados[9]), Integer.parseInt(dados[10]), dados[4]);
+
+						novaconta.put(dados[4], contaCorrente);
+					}
+					if ((dados[7].equalsIgnoreCase(TipoConta.CONTA_POUPANCA.name()))) {
+						ContaPoupanca contaPoupanca = new ContaPoupanca(Integer.parseInt(dados[8]),
+								Double.parseDouble(dados[9]), Integer.parseInt(dados[10]), dados[4]);
+						novaconta.put(dados[4], contaPoupanca);
+
+					}
+
 					novogerente.put(dados[4], gerente);
 
 //					logger.log(Level.INFO, gerente::toString);
@@ -68,8 +81,21 @@ public class RelatorioIO extends Funcionario {
 					// private String cpf;
 					// private Double salario;
 					Diretor diretor = new Diretor(Integer.parseInt(dados[1]), dados[2], LocalDate.parse(dados[3], dtf),
-							dados[4], dados[5], Double.parseDouble(dados[6]), TipoPessoa.DIRETOR);
+							dados[4], dados[6], Double.parseDouble(dados[5]), TipoPessoa.DIRETOR);
 
+					if ((dados[7].equalsIgnoreCase(TipoConta.CONTA_CORRENTE.name()))) {
+						ContaCorrente contaCorrente = new ContaCorrente(Integer.parseInt(dados[8]),
+								Double.parseDouble(dados[9]), Integer.parseInt(dados[10]), dados[4]);
+						System.out.println(dados[4]);
+						novaconta.put(dados[4], contaCorrente);
+					}
+					if ((dados[7].equalsIgnoreCase(TipoConta.CONTA_POUPANCA.name()))) {
+						ContaPoupanca contaPoupanca = new ContaPoupanca(Integer.parseInt(dados[8]),
+								Double.parseDouble(dados[9]), Integer.parseInt(dados[10]), dados[4]);
+						System.out.println(dados[4]);
+						novaconta.put(dados[4], contaPoupanca);
+
+					}
 					novodiretor.put(dados[4], diretor);
 //					logger.log(Level.INFO, diretor::toString);
 
@@ -79,8 +105,21 @@ public class RelatorioIO extends Funcionario {
 					// private String cpf;
 					// private Double salario;
 					Presidente presidente = new Presidente(Integer.parseInt(dados[1]), dados[2],
-							LocalDate.parse(dados[3], dtf), dados[4], dados[5], Double.parseDouble(dados[6]),
+							LocalDate.parse(dados[3], dtf), dados[4], dados[6], Double.parseDouble(dados[5]),
 							TipoPessoa.PRESIDENTE);
+
+					if ((dados[7].equalsIgnoreCase(TipoConta.CONTA_CORRENTE.name()))) {
+						ContaCorrente contaCorrente = new ContaCorrente(Integer.parseInt(dados[8]),
+								Double.parseDouble(dados[9]), Integer.parseInt(dados[10]), dados[4]);
+
+						novaconta.put(dados[4], contaCorrente);
+					}
+					if ((dados[7].equalsIgnoreCase(TipoConta.CONTA_POUPANCA.name()))) {
+						ContaPoupanca contaPoupanca = new ContaPoupanca(Integer.parseInt(dados[8]),
+								Double.parseDouble(dados[9]), Integer.parseInt(dados[10]), dados[4]);
+						novaconta.put(dados[4], contaPoupanca);
+
+					}
 					novopresidente.put(dados[4], presidente);
 					logger.log(Level.INFO, presidente::toString);
 				} else if (dados[0].equalsIgnoreCase(TipoPessoa.FUNCIONARIO.name())) {
@@ -102,7 +141,7 @@ public class RelatorioIO extends Funcionario {
 					// private String email;
 					Cliente cliente = new Cliente(Integer.parseInt(dados[1]), dados[2], LocalDate.parse(dados[3], dtf),
 							dados[4], dados[5]);
-				
+
 					if ((dados[6].equalsIgnoreCase(TipoConta.CONTA_CORRENTE.name()))) {
 						ContaCorrente contaCorrente = new ContaCorrente(Integer.parseInt(dados[7]),
 								Double.parseDouble(dados[8]), Integer.parseInt(dados[9]), dados[4]);
@@ -110,26 +149,26 @@ public class RelatorioIO extends Funcionario {
 					}
 					if ((dados[6].equalsIgnoreCase(TipoConta.CONTA_POUPANCA.name()))) {
 						ContaPoupanca contaPoupanca = new ContaPoupanca(Integer.parseInt(dados[7]),
-								Double.parseDouble(dados[8]), Integer.parseInt(dados[8]), dados[4]);
+								Double.parseDouble(dados[8]), Integer.parseInt(dados[9]), dados[4]);
 						novaconta.put(dados[4], contaPoupanca);
 
 					}
 					novocliente.put(dados[4], cliente);
 //					logger.log(Level.INFO, cliente::toString);
 				}
-				} else {
-					usuarios.setClientes(novocliente);
-					usuarios.setDiretores(novodiretor);
-					usuarios.setFuncionarios(novofuncionario);
-					usuarios.setPresidente(novopresidente);
-					usuarios.setGerentes(novogerente);
-					usuarios.setContas(novaconta);
-					isFinish = false;
-					break;
-				}
+			} else {
+				usuarios.setClientes(novocliente);
+				usuarios.setDiretores(novodiretor);
+				usuarios.setFuncionarios(novofuncionario);
+				usuarios.setPresidente(novopresidente);
+				usuarios.setGerentes(novogerente);
+				usuarios.setContas(novaconta);
+
+				isFinish = false;
+				break;
+			}
 		}
 		buffRead.close();
-		System.out.println("Fechado!");
 		return usuarios;
 	}
 }

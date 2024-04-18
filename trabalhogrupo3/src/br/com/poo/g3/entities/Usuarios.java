@@ -1,7 +1,11 @@
 package br.com.poo.g3.entities;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+
+import br.com.poo.g3.util.Comparador;
 
 public class Usuarios {
 	Map<String, Cliente> clientes;
@@ -72,6 +76,17 @@ public class Usuarios {
 		}
 		return null;
 	}
+
+	public Cliente buscarCliente(String cpf) {
+
+		for (Cliente cliente : this.clientes.values()) {
+			if (cliente.getCpf().equals(cpf)) {
+				return cliente;
+			}
+		}
+		return null;
+	}
+
 	public Funcionario buscarFuncionario(String cpf) {
 
 		for (Funcionario funcionario : this.funcionarios.values()) {
@@ -81,4 +96,84 @@ public class Usuarios {
 		}
 		return null;
 	}
+
+	public Gerente buscarGerente(Integer agencia) {
+
+		for (Gerente gerente : this.gerentes.values()) {
+			Conta contaGerente = buscarConta(gerente.getCpf());
+			if (contaGerente.getNumeroDaAgencia().equals(agencia)) {
+				return gerente;
+			}
+		}
+		return null;
+	}
+
+	public Integer buscarTotalContasPorAgencia(Integer agencia) {
+		Integer quantidade = 0;
+		for (Conta conta : this.contas.values()) {
+			if (conta.getNumeroDaAgencia().equals(agencia)) {
+				quantidade++;
+			}
+		}
+		return quantidade;
+	}
+
+	public List<Conta> buscarInformacoesDeContasPorAgencia(Integer agencia) {
+		List<Conta> contasDaAgencia = new ArrayList<Conta>();
+		for (Conta conta : this.contas.values()) {
+			if (conta.getNumeroDaAgencia().equals(agencia)) {
+				contasDaAgencia.add(conta);
+			}
+		}
+		return contasDaAgencia;
+	}
+
+	public List<String> buscarInformacoesDeClientes(Integer agencia) {
+		List<String> clienteDaAgencia = new ArrayList<String>();
+		for (Conta conta : this.contas.values()) {
+			if (conta.getNumeroDaAgencia().equals(agencia)) {
+				Cliente cliente = buscarCliente(conta.getCpf());
+				if (cliente != null) {
+					clienteDaAgencia.add("\nNome: " + cliente.getNome() + "\nCPF: " + cliente.getCpf()
+							+ "\nNúmero da agência: " + conta.getNumeroDaAgencia());
+				}
+			}
+		}
+		Collections.sort(clienteDaAgencia, new Comparador());
+		return clienteDaAgencia;
+	}
+
+	public List<String> buscarInformacoesDeDiretores() {
+		List<String> diretoresAgencias = new ArrayList<String>();
+		for (Diretor diretor : this.diretores.values()) {
+			Conta contaDiretor = buscarConta(diretor.getCpf());
+			Gerente gerenteDoDiretor = buscarGerente(contaDiretor.getNumeroDaAgencia());
+			if (gerenteDoDiretor != null) {
+				diretoresAgencias.add("\nDiretor: " + diretor.getNome() + "\nGerente: " + gerenteDoDiretor.getNome()
+						+ "\nNúmero da agência: " + contaDiretor.getNumeroDaAgencia());
+			} else {
+				diretoresAgencias.add("\nDiretor: " + diretor.getNome() + "\nGerente: " + "Gerente não encontrado"
+						+ "\nNúmero da agência: " + contaDiretor.getNumeroDaAgencia());
+			}
+		}
+		return diretoresAgencias;
+	}
+
+	public Double buscarCapital() {
+		Double valorTotal = 0.0;
+		for (Conta conta : this.contas.values()) {
+			valorTotal += conta.getSaldo();
+
+		}
+		return valorTotal;
+	}
+	public Double buscarSalarioFuncionario(String cpf) {
+		for (Funcionario funcionario : this.funcionarios.values()) {
+			if (funcionario.getCpf().equals(cpf)) {
+				return funcionario.getSalario();
+			}
+		}
+		return null;
+	}
+
 }

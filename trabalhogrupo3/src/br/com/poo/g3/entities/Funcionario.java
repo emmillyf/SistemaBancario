@@ -8,7 +8,6 @@ import br.com.poo.g3.enums.TipoPessoa;
 
 public class Funcionario extends Cliente {
 
-
 	private Double salario;
 	private TipoPessoa cargo;
 
@@ -23,12 +22,6 @@ public class Funcionario extends Cliente {
 
 	// construtor parametrizado
 
-	public Double getSalario() {
-		return salario;
-	}
-
-
-
 	public Funcionario(Integer id, String nome, LocalDate dataNasc, String cpf, String senha, Double salario,
 			TipoPessoa cargo) {
 		super(id, nome, dataNasc, cpf, senha);
@@ -42,8 +35,17 @@ public class Funcionario extends Cliente {
 
 	// método toString
 
+	public Double getSalario() {
+		return salario;
+	}
+
+	public void setSalario(Double salario) {
+		this.salario = salario;
+	}
+
 	@Override
 	public String toString() {
-		return "Funcionario \nid: " + this.getId() + "\nnome: " + this.getNome() +  "\nsalario: " + this.getSalario() + "\n";
+		return "Funcionario \nid: " + this.getId() + "\nnome: " + this.getNome() + "\nsalario: " + this.getSalario()
+				+ "\n";
 	}
 }
