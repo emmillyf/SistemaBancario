@@ -13,14 +13,10 @@ public class Funcionario extends Cliente {
 
 	static Map<Integer, Funcionario> mapaFuncionarios = new HashMap<>();
 
-	// construtor default
-
 	public Funcionario() {
 		super();
 
 	}
-
-	// construtor parametrizado
 
 	public Funcionario(Integer id, String nome, LocalDate dataNasc, String cpf, String senha, Double salario,
 			TipoPessoa cargo) {
@@ -48,4 +44,9 @@ public class Funcionario extends Cliente {
 		return "Funcionario \nid: " + this.getId() + "\nnome: " + this.getNome() + "\nsalario: " + this.getSalario()
 				+ "\n";
 	}
+
+	public TipoPessoa getCargo() {
+		return cargo;
+	}
+
 }

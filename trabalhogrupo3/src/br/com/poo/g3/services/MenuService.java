@@ -1,7 +1,6 @@
 package br.com.poo.g3.services;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +14,6 @@ import br.com.poo.g3.entities.Diretor;
 import br.com.poo.g3.entities.Gerente;
 import br.com.poo.g3.entities.Presidente;
 import br.com.poo.g3.entities.Usuarios;
-import br.com.poo.g3.enums.TipoPessoa;
 import br.com.poo.g3.util.Util;
 
 public class MenuService {
@@ -25,7 +23,6 @@ public class MenuService {
 	static Cliente clientelogado;
 	static Usuarios usuariosbanco;
 	static Conta contacliente;
-	static GrupoApplication main = new GrupoApplication();
 
 	public static void menuCadastro() throws IOException, InterruptedException {
 
@@ -49,7 +46,7 @@ public class MenuService {
 			Cliente cliente = autenticacaoController.cadastrarCliente();
 			Conta conta = autenticacaoController.cadastrarContaPoupanca(cliente.getCpf());
 			usuariosbanco.CadastrarContaClientes(cliente, conta);
-			main.menuInicial(usuariosbanco);
+			GrupoApplication.menuInicial(usuariosbanco);
 			break;
 		case 2:
 			Util.customizer();
@@ -63,7 +60,7 @@ public class MenuService {
 				Gerente gerente = autenticacaoController.cadastrarGerente();
 				Conta contaGerente = autenticacaoController.cadastrarContaCorrente(gerente.getCpf());
 				usuariosbanco.CadastrarContaGerentes(gerente, contaGerente);
-				main.menuInicial(usuariosbanco);
+				GrupoApplication.menuInicial(usuariosbanco);
 			}else {
 				logger.log(Level.INFO, "opção inválida =) ");
 			}
@@ -72,7 +69,7 @@ public class MenuService {
 			Diretor diretor = autenticacaoController.cadastrarDiretor();
 			Conta contaDiretor = autenticacaoController.cadastrarContaCorrente(diretor.getCpf());
 			usuariosbanco.CadastrarContaDiretor(diretor, contaDiretor);
-			main.menuInicial(usuariosbanco);
+			GrupoApplication.menuInicial(usuariosbanco);
 			}else {
 				logger.log(Level.INFO, "opção inválida =) ");
 			}
@@ -325,7 +322,7 @@ public class MenuService {
 			break;
 		case 4:
 			if (contacliente instanceof ContaPoupanca) {
-				((ContaPoupanca) contacliente).simularpoupanca();
+				ContaPoupanca.simularpoupanca();
 			}
 		case 5:
 			Util.customizer();

@@ -12,7 +12,6 @@ import br.com.poo.g3.entities.Gerente;
 import br.com.poo.g3.entities.Usuarios;
 import br.com.poo.g3.enums.TipoPessoa;
 import br.com.poo.g3.services.AutenticacaoService;
-import br.com.poo.g3.services.MenuService;
 import br.com.poo.g3.util.Util;
 
 public class AutenticacaoController {

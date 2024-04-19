@@ -2,9 +2,7 @@ package br.com.poo.g3.services;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -19,7 +17,6 @@ import br.com.poo.g3.entities.Gerente;
 import br.com.poo.g3.entities.Presidente;
 import br.com.poo.g3.entities.Usuarios;
 import br.com.poo.g3.enums.TipoPessoa;
-import br.com.poo.g3.io.RelatorioIO;
 import br.com.poo.g3.util.Util;
 
 public class AutenticacaoService {
@@ -35,22 +32,22 @@ public class AutenticacaoService {
 		String nome = sc.nextLine();
 		logger.log(Level.INFO, "Digite sua senha: ");
 		String senha = sc.nextLine();
-		switch (tipo){
-			case DIRETOR -> {
-				return loginDiretor(nome, senha);
-			}
-			case PRESIDENTE -> {
-				return loginPresidente(nome, senha);
-			}
-			case GERENTE -> {
+		switch (tipo) {
+		case DIRETOR:
+			return loginDiretor(nome, senha);
+
+		case PRESIDENTE:
+			return loginPresidente(nome, senha);
+
+		case GERENTE:
 			return loginGerente(nome, senha);
-			}
-			
-			case FUNCIONARIO -> {
-				return loginFuncionario(nome, senha);
-			}
+
+		case FUNCIONARIO:
+			return loginFuncionario(nome, senha);
+
+		default:
+			return login(nome, senha);
 		}
-		return login(nome, senha);
 	}
 
 	public Cliente login(String cpf, String senha) {
@@ -72,6 +69,7 @@ public class AutenticacaoService {
 		}
 		return null;
 	}
+
 	public Presidente loginPresidente(String cpf, String senha) {
 		// System.out.println(Cliente.getMapaClientes());
 		for (Presidente presidente : users.getPresidente().values()) {
@@ -80,19 +78,21 @@ public class AutenticacaoService {
 			}
 		}
 		return null;
-}
+	}
+
 	public Gerente loginGerente(String cpf, String senha) {
 		// System.out.println(Cliente.getMapaClientes());
 		for (Gerente gerente : users.getGerentes().values()) {
-			
+
 			if (gerente.getCpf().equals(cpf) && gerente.getSenha().equals(senha)) {
-				
+
 				return gerente;
 			}
-			
+
 		}
 		return null;
 	}
+
 	public Diretor loginDiretor(String cpf, String senha) {
 		// System.out.println(Cliente.getMapaClientes());
 		for (Diretor diretor : users.getDiretores().values()) {
@@ -100,9 +100,9 @@ public class AutenticacaoService {
 				return diretor;
 			}
 		}
-		return null;	
+		return null;
 	}
-	
+
 	public Cliente cadastrarCliente() {
 		Util.customizer();
 		Random random = new Random();
@@ -114,12 +114,11 @@ public class AutenticacaoService {
 		logger.log(Level.INFO, "Digite a dataNasc: ");
 		LocalDate dtNasc = LocalDate.parse(sc.nextLine(), dtf);
 		logger.log(Level.INFO, "Digite a senha: ");
-		String senha = sc.nextLine();
+		String senha = sc.next();
 		Cliente cliente = new Cliente(id, nome, dtNasc, cpf, senha);
-		System.out.println(cliente.getCpf());
-		System.out.println(cliente.getSenha());
 		return cliente;
 	}
+
 	public Gerente cadastrarGerente() {
 		Util.customizer();
 		Random random = new Random();
@@ -139,6 +138,7 @@ public class AutenticacaoService {
 		System.out.println(gerente.getSenha());
 		return gerente;
 	}
+
 	public Diretor cadastrarDiretor() {
 		Util.customizer();
 		Random random = new Random();
@@ -156,22 +156,28 @@ public class AutenticacaoService {
 		Diretor diretor = new Diretor(id, nome, dtNasc, cpf, senha, salario, TipoPessoa.DIRETOR);
 		return diretor;
 	}
+
 	public ContaCorrente cadastrarContaCorrente(String cpf) {
 		Util.customizer();
 		Random random = new Random();
 		Integer numerodaconta = random.nextInt(100);
+		sc.nextLine();
 		logger.log(Level.INFO, "Digite a numeroDaAgencia: ");
 		Integer numeroDaAgencia = sc.nextInt();
+		sc.nextLine();
 		ContaCorrente contaCorrente = new ContaCorrente(numerodaconta, 0.00, numeroDaAgencia, cpf);
 		return contaCorrente;
 	}
+
 	public ContaPoupanca cadastrarContaPoupanca(String cpf) {
 		Util.customizer();
 		Random random = new Random();
 		Integer numerodaconta = random.nextInt(100);
+		sc.nextLine();
 		logger.log(Level.INFO, "Digite a numeroDaAgencia: ");
 		Integer numeroDaAgencia = sc.nextInt();
+		sc.nextLine();
 		ContaPoupanca contaPoupanca = new ContaPoupanca(numerodaconta, 0.00, numeroDaAgencia, cpf);
-	return contaPoupanca;
+		return contaPoupanca;
 	}
 }
