@@ -121,3 +121,5 @@ execução do sistema;
 imprimir(arquivo gerado a partir de método de escrita);
 - O sistema deve realizar ao menos três tratamentos de erros personalizados.
 Exemplo: Caso um cliente tente realizar um depósito com valor indevido (valores negativos).
+
+![DiagramaClasses drawio](https://github.com/emmillyf/POOGrupo/assets/162373561/95d822b8-16e7-4cb5-9ae9-85059af0d4c9)
