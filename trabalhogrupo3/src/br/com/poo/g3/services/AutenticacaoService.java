@@ -33,21 +33,21 @@ public class AutenticacaoService {
 		logger.log(Level.INFO, "Digite sua senha: ");
 		String senha = sc.nextLine();
 		switch (tipo) {
-		case DIRETOR -> {
+		case DIRETOR:
 			return loginDiretor(nome, senha);
-		}
-		case PRESIDENTE -> {
-			return loginPresidente(nome, senha);
-		}
-		case GERENTE -> {
-			return loginGerente(nome, senha);
-		}
 
-		case FUNCIONARIO -> {
+		case PRESIDENTE:
+			return loginPresidente(nome, senha);
+
+		case GERENTE:
+			return loginGerente(nome, senha);
+
+		case FUNCIONARIO:
 			return loginFuncionario(nome, senha);
+
+		default:
+			return login(nome, senha);
 		}
-		}
-		return login(nome, senha);
 	}
 
 	public Cliente login(String cpf, String senha) {
@@ -116,8 +116,7 @@ public class AutenticacaoService {
 		logger.log(Level.INFO, "Digite a senha: ");
 		String senha = sc.nextLine();
 		Cliente cliente = new Cliente(id, nome, dtNasc, cpf, senha);
-		System.out.println(cliente.getCpf());
-		System.out.println(cliente.getSenha());
+		sc.nextLine();
 		return cliente;
 	}
 
