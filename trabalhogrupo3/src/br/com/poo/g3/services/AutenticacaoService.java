@@ -114,9 +114,8 @@ public class AutenticacaoService {
 		logger.log(Level.INFO, "Digite a dataNasc: ");
 		LocalDate dtNasc = LocalDate.parse(sc.nextLine(), dtf);
 		logger.log(Level.INFO, "Digite a senha: ");
-		String senha = sc.nextLine();
+		String senha = sc.next();
 		Cliente cliente = new Cliente(id, nome, dtNasc, cpf, senha);
-		sc.nextLine();
 		return cliente;
 	}
 
@@ -162,8 +161,10 @@ public class AutenticacaoService {
 		Util.customizer();
 		Random random = new Random();
 		Integer numerodaconta = random.nextInt(100);
+		sc.nextLine();
 		logger.log(Level.INFO, "Digite a numeroDaAgencia: ");
 		Integer numeroDaAgencia = sc.nextInt();
+		sc.nextLine();
 		ContaCorrente contaCorrente = new ContaCorrente(numerodaconta, 0.00, numeroDaAgencia, cpf);
 		return contaCorrente;
 	}
@@ -172,8 +173,10 @@ public class AutenticacaoService {
 		Util.customizer();
 		Random random = new Random();
 		Integer numerodaconta = random.nextInt(100);
+		sc.nextLine();
 		logger.log(Level.INFO, "Digite a numeroDaAgencia: ");
 		Integer numeroDaAgencia = sc.nextInt();
+		sc.nextLine();
 		ContaPoupanca contaPoupanca = new ContaPoupanca(numerodaconta, 0.00, numeroDaAgencia, cpf);
 		return contaPoupanca;
 	}
