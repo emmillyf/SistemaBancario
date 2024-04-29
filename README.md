@@ -1,8 +1,6 @@
 
 ![DiagramaClasses drawio](https://github.com/emmillyf/POOGrupo/assets/162373561/95d822b8-16e7-4cb5-9ae9-85059af0d4c9)
 
-
-Projetσ final da disciplina de JAVA 1
 Sistema Bancário
 O trabalho final da disciplina de Java 1 (orientação a objeto) consiste em uma atividade
 continuada paralela aos exercícios propostos na apostila da Caelum.
